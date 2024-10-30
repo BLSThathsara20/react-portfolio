@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/src/assets/fav.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Savindu Thaththsara - web Developer specializing in React, Vue.js, and modern web technologies. View my portfolio of web development projects and professional experience." />
+    <meta name="keywords" content="web Developer, React Developer, Vue.js Developer, Web Developer Sri Lanka, Savindu Thaththsara" />
+    <meta name="author" content="Savindu Thaththsara" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://blsthathsara.me/" />
+    <meta property="og:title" content="Savindu Thaththsara - web Developer Portfolio" />
+    <meta property="og:description" content="Experienced web Developer specializing in creating engaging web experiences with React, Vue.js, and modern web technologies." />
+    <meta property="og:image" content="/src/assets/unnamed.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://blsthathsara.me/" />
+    <meta property="twitter:title" content="Savindu Thaththsara - web Developer Portfolio" />
+    <meta property="twitter:description" content="Experienced web Developer specializing in creating engaging web experiences with React, Vue.js, and modern web technologies." />
+    <meta property="twitter:image" content="/src/assets/unnamed.png" />
+
+    <title>Savindu Thaththsara - Web Developer</title>
+
+    <script>
+      // Handle SPA routing redirect
+      (function() {
+        const redirect = new URLSearchParams(window.location.search).get('p');
+        if (redirect) {
+          window.history.replaceState(null, null, '/' + redirect);
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

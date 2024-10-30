@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found</title>
+    <script>
+      // Single Page Apps for GitHub Pages
+      // https://github.com/rafgraph/spa-github-pages
+      // This script takes the current URL and converts the path and query
+      // string into just a query string, and then redirects the browser
+      // to the new URL with only a query string and hash fragment
+      
+      const l = window.location;
+      const segments = l.pathname.split('/').filter(Boolean);
+      if (segments.length) {
+        window.location.href = `${l.protocol}//${l.hostname}${l.port ? ':' + l.port : ''}/?p=${segments.join('/')}${l.search}${l.hash}`;
+      }
+    </script>
+</head>
+<body>
+    <p>Redirecting...</p>
+</body>
+</html>

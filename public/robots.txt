@@ -1,0 +1,29 @@
+User-agent: *
+Allow: /
+
+# Allow crawling of all content
+Disallow:
+
+# Sitemap location
+Sitemap: https://blsthathsara.me/sitemap.xml
+
+# Crawl-delay to prevent overwhelming the server (optional)
+Crawl-delay: 1
+
+# Block crawling of certain file types (optional)
+Disallow: /*.json$
+Disallow: /*.xml$
+Disallow: /*.txt$
+
+# Social media verification files (if needed)
+Allow: /pinterest-*.html
+Allow: /google*.html
+Allow: /yandex*.html
+Allow: /brave-rewards-verification.txt
+Allow: /facebook-domain-verification.txt
+
+# Common directories to disallow (if needed)
+Disallow: /cgi-bin/
+Disallow: /tmp/
+Disallow: /admin/
+Disallow: /private/
