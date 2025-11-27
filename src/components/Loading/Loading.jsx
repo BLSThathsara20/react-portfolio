@@ -20,6 +20,7 @@ const Loading = ({ isLoading }) => {
           transition={{
             duration: 2,
             repeat: Infinity,
+            repeatType: "loop",
             ease: "easeInOut"
           }}
         >
@@ -32,6 +33,7 @@ const Loading = ({ isLoading }) => {
           transition={{
             duration: 2,
             repeat: Infinity,
+            repeatType: "loop",
             ease: "easeInOut"
           }}
           className="mt-4 text-white text-lg"

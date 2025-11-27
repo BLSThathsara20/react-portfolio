@@ -1,19 +1,14 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Download, 
-  Loader2, 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Github, 
-  Linkedin, 
-  Globe,
+  Briefcase, 
+  GraduationCap,
   Award,
-  BookOpen,
-  Briefcase,
   Code,
-  ExternalLink
+  Sparkles,
+  ArrowRight,
+  Loader2
 } from 'lucide-react';
 import SEO from '../components/SEO';
 import Notification from '../components/Notification';
@@ -21,11 +16,11 @@ import Notification from '../components/Notification';
 const ResumePage = () => {
   const [isDownloading, setIsDownloading] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
-
+  
   const handleDownload = async () => {
     setIsDownloading(true);
     try {
-      const response = await fetch('/src/assets/B.L.S. Thathsara - web developer old cv.pdf');
+      const response = await fetch('/cv.pdf');
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
@@ -45,160 +40,76 @@ const ResumePage = () => {
     }
   };
 
-  const personalInfo = {
-    name: "B.L.S. Thaththsara",
-    role: "Frontend Developer",
-    email: "blsthathsara@gmail.com",
-    // phone: "0764067093",
-    address: "Nugehena, Kondagala, Beliaththa road, Weeraketiya",
-    social: {
-      github: "BLSThathsara20",
-      linkedin: "blsthathsara",
-      medium: "blsthathsara",
-      website: "blsthathsara.com"
-    },
-    profile: "I am a self-motivated and dedicated individual with a flexible approach to teamwork and a strong willingness to learn new technologies. I eagerly seek new challenges and thrive in dynamic environments."
-  };
-
-  const education = [
+  const highlights = [
     {
-      school: "Sri Lanka Institute Of Advanced Technical Education",
-      degree: "HND in Information Technology",
-      period: "Expected 2022 May",
-      projects: [
-        "Complain Management System for Sri Lanka police (Final group project)",
-        "National PCR Data Analysis module (Final Individual project)"
-      ],
-      courses: [
-        "Java SE Development",
-        "Web Technologies (HTML, CSS, Javascript, NodeJS)"
-      ]
+      icon: Briefcase,
+      title: "5+ Years Experience",
+      description: "Crafting exceptional frontend experiences with modern web technologies",
+      gradient: "from-blue-500/20 to-purple-500/20"
     },
     {
-      school: "IJSE | Institute of Software Engineering",
-      degree: "Diploma in Software Engineering",
-      period: "Expected 2022 August"
+      icon: Code,
+      title: "20+ Projects",
+      description: "Delivering high-impact solutions across diverse industries",
+      gradient: "from-purple-500/20 to-pink-500/20"
     },
     {
-      school: "H/ Rajapaksha Central College - Weeraketiya",
-      degree: "G.C.E. Advanced Level : Technology Stream",
-      period: "2018",
-      results: "Z-Score - 0.7148"
+      icon: Award,
+      title: "Multiple Awards",
+      description: "Including NASA Space App Challenge achievements",
+      gradient: "from-orange-500/20 to-red-500/20"
+    },
+    {
+      icon: GraduationCap,
+      title: "Strong Education",
+      description: "HND in IT & Diploma in Software Engineering",
+      gradient: "from-green-500/20 to-emerald-500/20"
     }
   ];
 
-  const workExperience = [
-    {
-      company: "HexaCode Solution (PVT) Ltd",
-      role: "Front End Developer & Social Media Marketer",
-      period: "April 2019 - Present",
-      projects: [
-        { name: "metrob2b.lk Website", url: "https://metrob2b.lk" },
-        { name: "watchinglanka.com Website", url: "https://watchinglanka.com" },
-        { name: "dizifxm.com Website", url: "https://dizifxm.com" },
-        { name: "lagamakade.com Website", url: "https://lagamakade.com" }
-      ],
-      technologies: ["Wordpress", "Elementor", "Woocommerce", "HTML", "CSS", "Javascript", "PHP"]
-    },
-    {
-      company: "Ministry of Health Sri Lanka",
-      role: "Volunteer Software Developer",
-      period: "2021",
-      project: "National Covid-19 Health Information System",
-      technologies: [
-        "Java EE", "XHTML", "Bootstrap", "SCSS", "JSF", "JPA", "Primefaces", "AJAX", "MySQL"
-      ]
-    },
-    {
-      company: "Rightplace.lk",
-      role: "Backend Manager & Social Media Marketer",
-      project: "rightplace.lk Website"
-    }
+  const skills = [
+    { name: "React", category: "frontend" },
+    { name: "Vue.js", category: "frontend" },
+    { name: "Jquary", category: "language" },
+    { name: "Tailwind CSS", category: "styling" },
+    { name: "Node.js", category: "backend" },
+    { name: "GSAP", category: "animation" },
+    { name: "Framer Motion", category: "animation" },
+    { name: "Git", category: "tool" },
+    { name: "Responsive Design", category: "concept" },
+    { name: "SEO", category: "optimization" }
   ];
 
-  const skills = {
-    programming: {
-      title: "Programming Languages",
-      items: ["JavaScript", "PHP", "Java", "C#", "Visual Basic", "C++"]
-    },
-    webDev: {
-      title: "Web Development",
-      items: ["HTML", "CSS", "SCSS", "PHP", "Bootstrap", "Tailwind CSS", "Vue.js", "Electron.js", "WordPress"]
-    },
-    tools: {
-      title: "Tools & Software",
-      items: ["Figma", "Adobe Photoshop", "Git", "Visual Studio Code", "IntelliJ IDEA"]
-    },
-    database: {
-      title: "Databases",
-      items: ["MySQL", "SQL Server", "Firebase"]
-    },
-    personal: {
-      title: "Personal Skills",
-      items: ["Leadership", "Self Learning", "Team work", "Hardworking", "Quick Learner"]
+  // Smooth scroll animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
     }
   };
 
-  const projects = [
-    {
-      name: "National Covid-19 Health Information System",
-      description: "Java EE web-based project by the Information Unit of the Ministry of Health to manage covid 19 situation in Sri Lanka",
-      type: "Ministry Project"
-    },
-    {
-      name: "Complain Management System for Sri Lanka Police",
-      description: "Desktop application for managing the Complaints Division of the Sri Lanka Police - Galle branch",
-      type: "Final Group Project"
-    },
-    {
-      name: "Vehicle SparePart Ordering System",
-      description: "An e-commerce web application designed to order vehicle spare parts",
-      type: "Personal Vue.js Project (Ongoing)"
-    },
-    {
-      name: "Tuition Class Web Application",
-      description: "A project created for a tuition class to manage the students relevant to the courses",
-      type: "Personal PHP Project"
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100
+      }
     }
-  ];
-
-  const achievements = [
-    "Participated in Nasa Space App Challenge 2020",
-    "Achieved Global Connection Award in Nasa Space App Challenge 2021",
-    "Participated in Home Alone hackathon by University of Moratuwa",
-    "Participated in Designthon Challenge by SLIT",
-    "Created an arduino project for an arduino competition",
-    "Organized an arduino workshop",
-    "Member of HNDIT Web development team",
-    "Volunteer works at sumagaasapuwa.com"
-  ];
-
-  const interests = ["Photography", "Hiking", "Music", "Reading"];
-
-  const referees = [
-    {
-      name: "Mr. Buddhi Prasan",
-      title: "Senior Software Engineer",
-      address: "No 360, Janaraja Mv, Matara",
-      phone: "0712517775",
-      email: "buddhiprasan12@gmail.com"
-    },
-    {
-      name: "Mr. Thamara Waidyarathne",
-      title: "Lecturer at SLIATE",
-      address: "Galle",
-      phone: "0713949501",
-      email: "thamara@sliate.ac.lk"
-    }
-  ];
+  };
 
   return (
     <>
       <SEO
         title="Resume - Savindu Thaththsara"
-        description={personalInfo.profile}
-        keywords={['frontend developer', 'web developer', 'react developer', 'vue.js developer']}
-        author={personalInfo.name}
+        description="Download my resume to explore my journey in frontend development, featuring 5+ years of experience, award-winning projects, and technical expertise."
+        keywords={['frontend developer', 'react developer', 'vue.js developer', 'UI developer']}
       />
 
       <Notification
@@ -211,222 +122,188 @@ const ResumePage = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="min-h-screen p-4 sm:p-8"
+        className="min-h-screen p-4 sm:p-6 lg:p-8 pb-32 bg-gradient-to-b from-background to-background-lighter"
       >
-        <div className="max-w-4xl mx-auto pt-20">
-          {/* Header Section */}
-          <div className="flex flex-col sm:flex-row justify-between items-start gap-4 mb-8">
-            <div>
-              <h1 className="text-3xl sm:text-4xl font-bold">{personalInfo.name}</h1>
-              <p className="text-xl text-white/60">{personalInfo.role}</p>
-            </div>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={handleDownload}
-              disabled={isDownloading}
-              className="flex items-center gap-2 px-6 py-3 bg-white/10
-                       hover:bg-white/20 rounded-lg transition-colors w-full sm:w-auto
-                       justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+        <motion.div 
+          className="max-w-5xl mx-auto pt-20 pb-8"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          {/* Hero Section with Enhanced Animation */}
+          <div className="text-center mb-16 relative">
+            <motion.div
+              className="absolute inset-0 -z-10"
+              animate={{
+                background: [
+                  "radial-gradient(circle at center, rgba(59,130,246,0.1) 0%, transparent 70%)",
+                  "radial-gradient(circle at center, rgba(139,92,246,0.1) 0%, transparent 70%)",
+                  "radial-gradient(circle at center, rgba(59,130,246,0.1) 0%, transparent 70%)"
+                ]
+              }}
+              transition={{
+                duration: 4,
+                repeat: 9999,
+                repeatType: "loop",
+                ease: "easeInOut"
+              }}
+            />
+            
+            <motion.div
+              variants={itemVariants}
+              className="flex items-center justify-center gap-3 mb-6"
             >
-              {isDownloading ? (
-                <Loader2 className="w-5 h-5 animate-spin" />
-              ) : (
-                <>
-                  <Download className="w-5 h-5" />
-                  Download CV
-                </>
-              )}
-            </motion.button>
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 8, repeat: 9999, repeatType: "loop", ease: "linear" }}
+              >
+                <Sparkles className="w-8 h-8 text-blue-400" />
+              </motion.div>
+              <h1 className="text-5xl sm:text-6xl font-bold bg-clip-text text-transparent 
+                         bg-gradient-to-r from-white via-white/90 to-white/80">
+                My Resume
+              </h1>
+              <motion.div
+                animate={{ rotate: -360 }}
+                transition={{ duration: 8, repeat: 9999, repeatType: "loop", ease: "linear" }}
+              >
+                <Sparkles className="w-8 h-8 text-blue-400" />
+              </motion.div>
+            </motion.div>
+
+            <motion.p 
+              variants={itemVariants}
+              className="text-xl sm:text-2xl text-white/60 max-w-3xl mx-auto mb-12 leading-relaxed"
+            >
+              Discover my journey in crafting exceptional digital experiences through
+              modern web technologies and creative innovations.
+            </motion.p>
+
+            <motion.div variants={itemVariants}>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={handleDownload}
+                disabled={isDownloading}
+                className="group relative inline-flex items-center gap-3 px-8 py-4 
+                         bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-blue-500/20 
+                         rounded-xl backdrop-blur-sm border border-white/10 
+                         transition-all duration-300 hover:border-white/20
+                         disabled:opacity-50 disabled:cursor-not-allowed
+                         overflow-hidden"
+              >
+                {/* Animated background */}
+                <motion.div
+                  className="absolute inset-0 -z-10"
+                  animate={{
+                    backgroundPosition: ["200% 0%", "-200% 0%"]
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: 9999,
+                    repeatType: "loop",
+                    ease: "linear"
+                  }}
+                  style={{
+                    background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent)",
+                    backgroundSize: "200% 100%"
+                  }}
+                />
+
+                {isDownloading ? (
+                  <Loader2 className="w-6 h-6 animate-spin" />
+                ) : (
+                  <>
+                    <Download className="w-6 h-6" />
+                    <span className="text-lg font-medium">Download Full Resume</span>
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </>
+                )}
+              </motion.button>
+            </motion.div>
           </div>
 
-          {/* Profile */}
+          {/* Highlights Grid with Enhanced Animations */}
           <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20 mb-8"
+            variants={containerVariants}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
           >
-            <p className="text-lg text-white/80 leading-relaxed">{personalInfo.profile}</p>
+            {highlights.map((highlight, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                whileHover={{ y: -5 }}
+                className="group relative bg-white/10 backdrop-blur-lg rounded-xl p-6 
+                         border border-white/20 overflow-hidden"
+              >
+                {/* Animated gradient background */}
+                <motion.div
+                  className={`absolute inset-0 opacity-0 group-hover:opacity-100 
+                           transition-opacity duration-500 bg-gradient-to-r ${highlight.gradient}`}
+                  animate={{
+                    scale: [1, 1.2, 1],
+                    rotate: [0, 5, 0]
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: 9999,
+                    repeatType: "loop",
+                    ease: "easeInOut"
+                  }}
+                />
+
+                <div className="relative z-10">
+                  <highlight.icon 
+                    className="w-10 h-10 mb-4 text-white/60 
+                             group-hover:text-white transition-colors" 
+                  />
+                  <h3 className="text-xl font-bold mb-2">{highlight.title}</h3>
+                  <p className="text-white/60 group-hover:text-white/80 transition-colors">
+                    {highlight.description}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
           </motion.div>
 
-          {/* Contact Information */}
+          {/* Skills Cloud with Interactive Animations */}
           <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.1 }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12"
+            variants={containerVariants}
+            className="bg-white/10 backdrop-blur-lg rounded-xl p-8 
+                     border border-white/20 text-center"
           >
-            <div className="space-y-4">
-              <div className="flex items-center gap-2">
-                <Mail className="w-5 h-5 text-white/60" />
-                <a href={`mailto:${personalInfo.email}`} className="hover:text-white/80">
-                  {personalInfo.email}
-                </a>
-              </div>
-              {/* <div className="flex items-center gap-2">
-                <Phone className="w-5 h-5 text-white/60" />
-                <a href={`tel:${personalInfo.phone}`}>{personalInfo.phone}</a>
-              </div> */}
-              <div className="flex items-center gap-2">
-                <MapPin className="w-5 h-5 text-white/60" />
-                <span className="text-sm">{personalInfo.address}</span>
-              </div>
-            </div>
-            <div className="space-y-4">
-              <div className="flex items-center gap-2">
-                <Globe className="w-5 h-5 text-white/60" />
-                <a 
-                  href={`https://${personalInfo.social.website}`} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="hover:text-white/80"
+            <motion.h2 
+              variants={itemVariants}
+              className="text-2xl font-bold mb-8"
+            >
+              Core Skills & Technologies
+            </motion.h2>
+            <motion.div 
+              variants={containerVariants}
+              className="flex flex-wrap justify-center gap-3"
+            >
+              {skills.map((skill, index) => (
+                <motion.span
+                  key={index}
+                  variants={itemVariants}
+                  whileHover={{ 
+                    scale: 1.1,
+                    backgroundColor: "rgba(255, 255, 255, 0.15)" 
+                  }}
+                  className={`px-4 py-2 rounded-full border border-white/10 
+                           transition-colors cursor-default
+                           ${skill.category === 'frontend' ? 'bg-blue-500/10' :
+                             skill.category === 'animation' ? 'bg-purple-500/10' :
+                             skill.category === 'styling' ? 'bg-pink-500/10' :
+                             skill.category === 'optimization' ? 'bg-green-500/10' :
+                             'bg-white/5'}`}
                 >
-                  {personalInfo.social.website}
-                </a>
-              </div>
-              <div className="flex items-center gap-2">
-                <Github className="w-5 h-5 text-white/60" />
-                <a 
-                  href={`https://github.com/${personalInfo.social.github}`} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="hover:text-white/80"
-                >
-                  github.com/{personalInfo.social.github}
-                </a>
-              </div>
-              <div className="flex items-center gap-2">
-                <Linkedin className="w-5 h-5 text-white/60" />
-                <a 
-                  href={`https://linkedin.com/in/${personalInfo.social.linkedin}`} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="hover:text-white/80"
-                >
-                  linkedin.com/in/{personalInfo.social.linkedin}
-                </a>
-              </div>
-            </div>
+                  {skill.name}
+                </motion.span>
+              ))}
+            </motion.div>
           </motion.div>
-
-          {/* Experience Section */}
-          <motion.section
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="mb-12"
-          >
-            <div className="flex items-center gap-2 mb-6">
-              <Briefcase className="w-6 h-6" />
-              <h2 className="text-2xl font-bold">Work Experience</h2>
-            </div>
-            <div className="space-y-6">
-              {workExperience.map((exp, index) => (
-                <div 
-                  key={index}
-                  className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20"
-                >
-                  <div className="flex justify-between items-start mb-4">
-                    <div>
-                      <h3 className="font-bold text-lg">{exp.role}</h3>
-                      <p className="text-white/60">{exp.company}</p>
-                    </div>
-                    <span className="text-white/40 text-sm">{exp.period}</span>
-                  </div>
-                  {exp.projects && (
-                    <div className="mb-4">
-                      <h4 className="font-medium mb-2">Projects:</h4>
-                      <ul className="space-y-2">
-                        {Array.isArray(exp.projects) ? exp.projects.map((project, i) => (
-                          <li key={i} className="flex items-center gap-2">
-                            <span>{project.name}</span>
-                            {project.url && (
-                              <a 
-                                href={project.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-white/60 hover:text-white"
-                              >
-                                <ExternalLink className="w-4 h-4" />
-                              </a>
-                            )}
-                          </li>
-                        )) : (
-                          <li>{exp.project}</li>
-                        )}
-                      </ul>
-                    </div>
-                  )}
-                  {exp.technologies && (
-                    <div className="flex flex-wrap gap-2">
-                      {exp.technologies.map((tech, i) => (
-                        <span key={i} className="px-3 py-1 bg-white/5 rounded-full text-sm">
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </motion.section>
-
-          {/* Education */}
-          <motion.section
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.4 }}
-            className="mb-12"
-          >
-            <div className="flex items-center gap-2 mb-6">
-              <BookOpen className="w-6 h-6" />
-              <h2 className="text-2xl font-bold">Education</h2>
-            </div>
-            <div className="space-y-6">
-              {education.map((edu, index) => (
-                <div 
-                  key={index}
-                  className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20"
-                >
-                  <div className="flex justify-between items-start mb-2">
-                    <h3 className="font-bold text-lg">{edu.degree}</h3>
-                    <span className="text-white/40 text-sm">{edu.date}</span>
-                  </div>
-                  <p className="text-white/60 mb-4">{edu.school}</p>
-                  {edu.details && (
-                    <ul className="list-disc list-inside space-y-1 text-white/80">
-                      {edu.details.map((detail, i) => (
-                        <li key={i}>{detail}</li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              ))}
-            </div>
-          </motion.section>
-
-          {/* Achievements */}
-          <motion.section
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.5 }}
-          >
-            <div className="flex items-center gap-2 mb-6">
-              <Award className="w-6 h-6" />
-              <h2 className="text-2xl font-bold">Achievements</h2>
-            </div>
-            <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20">
-              <ul className="space-y-4">
-                {achievements.map((achievement, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <Award className="w-5 h-5 mt-1 flex-shrink-0 text-white/60" />
-                    <span>{achievement}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </motion.section>
-        </div>
+        </motion.div>
       </motion.div>
     </>
   );

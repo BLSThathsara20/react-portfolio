@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+  }
+ 
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+  }
+}
+
+/* Theme-specific styles */
+.light {
+  color-scheme: light;
+  --background-color: 255 255 255;
+  --text-color: 23 23 23;
+  --glass-bg: 255 255 255 0.1;
+  --glass-border: 0 0 0 0.1;
+}
+
+.dark {
+  color-scheme: dark;
+  --background-color: 23 23 23;
+  --text-color: 255 255 255;
+  --glass-bg: 255 255 255 0.1;
+  --glass-border: 255 255 255 0.2;
+}
+
+/* Base styles */
+body {
+  @apply antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-white;
+}
+
+/* Glass effect component */
+.glass-panel {
+  @apply bg-white/10 dark:bg-black/10 backdrop-blur-lg border border-white/20 dark:border-white/10;
+}
+
+/* Custom utilities */
+.text-themed {
+  @apply text-gray-900 dark:text-white;
+}
+
+.bg-themed {
+  @apply bg-white dark:bg-gray-900;
+}
+
+.border-themed {
+  @apply border-gray-200 dark:border-gray-800;
+}

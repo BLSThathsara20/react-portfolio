@@ -6,6 +6,20 @@
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
+    /* Enhanced color system for better contrast */
+    --text-primary: 255 255 255;
+    --text-secondary: 255 255 255 / 0.7;
+    --text-tertiary: 255 255 255 / 0.5;
+    --border-primary: 255 255 255 / 0.2;
+    --border-hover: 255 255 255 / 0.3;
+    /* Spacing scale for better rhythm */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-2xl: 3rem;
+    --spacing-3xl: 4rem;
   }
  
   .dark {
@@ -31,14 +45,70 @@
   --glass-border: 255 255 255 0.2;
 }
 
-/* Base styles */
-body {
-  @apply antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-white;
+/* Base styles with improved typography */
+* {
+  @apply border-border;
 }
 
-/* Glass effect component */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  @apply antialiased bg-background text-white;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+}
+
+/* Enhanced typography scale */
+h1, h2, h3, h4, h5, h6 {
+  @apply font-bold;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  @apply text-4xl sm:text-5xl md:text-6xl lg:text-7xl;
+}
+
+h2 {
+  @apply text-3xl sm:text-4xl md:text-5xl;
+}
+
+h3 {
+  @apply text-2xl sm:text-3xl;
+}
+
+/* Improved focus states for accessibility */
+*:focus-visible {
+  @apply outline-none ring-2 ring-blue-500/50 ring-offset-2 ring-offset-background;
+}
+
+/* Smooth transitions for all interactive elements */
+a, button, input, textarea, select {
+  @apply transition-all duration-200 ease-out;
+}
+
+/* Glass effect component with enhanced styling */
 .glass-panel {
   @apply bg-white/10 dark:bg-black/10 backdrop-blur-lg border border-white/20 dark:border-white/10;
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+}
+
+/* Enhanced glass morphism */
+.glass-enhanced {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
 /* Custom utilities */
@@ -52,4 +122,85 @@ body {
 
 .border-themed {
   @apply border-gray-200 dark:border-gray-800;
+}
+
+/* Improved button styles */
+.btn-primary {
+  @apply px-6 py-3 rounded-lg font-medium;
+  @apply bg-blue-500/20 hover:bg-blue-500/30;
+  @apply border border-blue-500/30 hover:border-blue-500/40;
+  @apply transition-all duration-300;
+  @apply focus:outline-none focus:ring-2 focus:ring-blue-500/50;
+}
+
+.btn-secondary {
+  @apply px-6 py-3 rounded-lg font-medium;
+  @apply bg-white/5 hover:bg-white/10;
+  @apply border border-white/10 hover:border-white/20;
+  @apply transition-all duration-300;
+}
+
+/* Card hover effects */
+.card-hover {
+  @apply transition-all duration-300;
+  @apply hover:scale-[1.02] hover:shadow-xl;
+  @apply hover:border-white/30;
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-background;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-white/20 rounded-full;
+  @apply hover:bg-white/30;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-white/40;
+}
+
+/* Selection styles */
+::selection {
+  @apply bg-blue-500/30 text-white;
+}
+
+/* Loading skeleton */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.skeleton {
+  @apply bg-white/5 rounded;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

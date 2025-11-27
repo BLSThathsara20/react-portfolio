@@ -1,0 +1,25 @@
+// Forward these variables so they can be used in other files
+@forward 'variables/colors';
+@forward 'variables/animations';
+@forward 'variables/breakpoints';
+@forward 'variables/spacing';
+
+// Colors
+$primary-color: #6366f1;  // Indigo
+$secondary-color: #8b5cf6; // Purple
+$dark-bg: #111827;        // Gray-900
+$light-text: #f3f4f6;     // Gray-100
+
+// Animations
+$transition-speed: 0.3s;
+$transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+// Breakpoints
+$mobile: 640px;
+$tablet: 768px;
+$desktop: 1024px;
+
+// Spacing
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 2rem;

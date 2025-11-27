@@ -1,10 +1,19 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Github, Loader2, Code } from 'lucide-react';
+import { ExternalLink, Github, Loader2, Code, Book } from 'lucide-react';
 import EmptyState from '../components/EmptyState';
 import Badge from '../components/Badge';
 import { projects } from '../data/projects'; // Import the projects data
 import ErrorBoundary from '../components/ErrorBoundary';
+
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 }
+  }
+};
 
 const ProjectCard = React.forwardRef(({ project, isGithubProject = false }, ref) => {
   if (isGithubProject) {
@@ -208,25 +217,35 @@ const ProjectsPage = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="min-h-screen p-8"
+      className="min-h-screen p-4 sm:p-6 lg:p-8 pb-32"
     >
       {/* API Status Badge */}
       <Badge status={apiStatus} />
 
-      <div className="max-w-6xl mx-auto pt-20">
+      <div className="max-w-6xl mx-auto pt-20 pb-8">
         <motion.div
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           className="space-y-8"
         >
-          {/* Header */}
-          <div className="text-center space-y-4">
-            <h1 className="text-4xl font-bold">Projects</h1>
-            <p className="text-white/60 max-w-2xl mx-auto">
-              A collection of my latest projects and starred GitHub repositories,
-              showcasing my skills in web development and design.
+         {/* Header */}
+         <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="text-center space-y-6 mb-12 lg:mb-16"
+          >
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <Book className="w-8 h-8 text-blue-400" />
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary">My Projects</h1>
+              <Book className="w-8 h-8 text-blue-400" />
+            </div>
+
+            <p className="text-lg sm:text-xl text-text-secondary max-w-2xl mx-auto leading-relaxed">
+              A showcase of my frontend development projects, experiments, and GitHub contributions.
             </p>
-          </div>
+          </motion.div>
+
 
           {/* Categories */}
           <div className="flex flex-wrap justify-center gap-2 sm:gap-4">

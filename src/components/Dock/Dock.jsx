@@ -9,7 +9,8 @@ import {
   Newspaper, 
   Mail, 
   FileText,
-  Sparkles
+  Sparkles,
+  Award
 } from 'lucide-react';
 
 const Dock = ({ showDock, onHomeClick }) => {
@@ -36,6 +37,7 @@ const Dock = ({ showDock, onHomeClick }) => {
       description: 'Explore my creative experiments'
     },
     { icon: Newspaper, label: 'Blog', path: '/blog' },
+    { icon: Award, label: 'Activities', path: '/activities' },
     { icon: Mail, label: 'Contact', path: '/contact' },
     { icon: FileText, label: 'Resume', path: '/resume' },
   ];
@@ -43,7 +45,7 @@ const Dock = ({ showDock, onHomeClick }) => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50">
+    <div className="fixed bottom-0 left-0 right-0 z-50 pointer-events-none">
       <AnimatePresence>
         {showDock && scrollDirection === 'up' && (
           <motion.div
@@ -51,11 +53,18 @@ const Dock = ({ showDock, onHomeClick }) => {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 100, opacity: 0 }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            className="flex justify-center pb-8 px-4"
+            className="flex justify-center pb-6 sm:pb-8 px-4 pointer-events-auto"
           >
-            <div className={`flex items-center justify-center gap-1 sm:gap-2 px-3 sm:px-6 py-2 sm:py-3 
-                          rounded-2xl bg-white/10 backdrop-blur-lg border border-white/20 shadow-lg
-                          ${isWindows ? 'windows-dock' : 'mac-dock'}`}>
+            {/* Enhanced glass background with backdrop */}
+            <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none" />
+            <div className={`relative flex items-center justify-center gap-1 sm:gap-2 px-4 sm:px-6 py-3 sm:py-4 
+                          rounded-2xl backdrop-blur-xl bg-black/40 border border-white/20 shadow-2xl
+                          ${isWindows ? 'windows-dock' : 'mac-dock'}`}
+                          style={{
+                            backdropFilter: 'blur(20px) saturate(180%)',
+                            WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+                            boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.1)'
+                          }}>
               {navItems.map((item) => (
                 <div key={item.path} className="relative flex flex-col items-center">
                   {/* Tooltip Container - Keeping original alignment */}
@@ -105,7 +114,8 @@ const Dock = ({ showDock, onHomeClick }) => {
                             }}
                             transition={{
                               duration: 2,
-                              repeat: Infinity,
+                              repeat: 9999,
+                              repeatType: "loop",
                               ease: "linear",
                               repeatDelay: 1
                             }}
@@ -117,7 +127,8 @@ const Dock = ({ showDock, onHomeClick }) => {
                             }}
                             transition={{
                               duration: 2,
-                              repeat: Infinity,
+                              repeat: 9999,
+                              repeatType: "loop",
                               ease: "easeInOut"
                             }}
                           />

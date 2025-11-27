@@ -124,6 +124,7 @@ const ColorMeditationGame = () => {
             transition={{
               duration: 2,
               repeat: Infinity,
+              repeatType: "loop",
               ease: "easeInOut"
             }}
             className="text-2xl font-bold text-white/80"

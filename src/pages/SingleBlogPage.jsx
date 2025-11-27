@@ -46,14 +46,14 @@ const SingleBlogPage = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="min-h-screen p-8"
+        className="min-h-screen p-4 sm:p-6 lg:p-8 pb-32"
       >
-        <div className="max-w-3xl mx-auto pt-20">
+        <div className="max-w-3xl mx-auto pt-20 pb-8">
           {/* Header Navigation */}
           <div className="flex items-center justify-between mb-8">
             <Link
               to="/blog"
-              className="flex items-center text-white/60 hover:text-white"
+              className="flex items-center text-text-secondary hover:text-text-primary transition-colors"
             >
               <ArrowLeft className="w-5 h-5 mr-2" />
               Back to Blog
@@ -64,8 +64,8 @@ const SingleBlogPage = () => {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handleCopyLink}
-                className="relative p-2 rounded-lg bg-white/10 hover:bg-white/20 
-                         transition-colors"
+                className="relative p-2 rounded-lg glass-enhanced hover:border-white/20 
+                         transition-all duration-300"
               >
                 <Copy className="w-5 h-5" />
                 {showCopyTooltip && (
@@ -74,7 +74,8 @@ const SingleBlogPage = () => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
                     className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 
-                             text-xs bg-black rounded whitespace-nowrap"
+                             text-xs bg-black/80 backdrop-blur-sm rounded whitespace-nowrap
+                             border border-white/20"
                   >
                     Link copied!
                   </motion.span>
@@ -83,8 +84,8 @@ const SingleBlogPage = () => {
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                className="p-2 rounded-lg bg-white/10 hover:bg-white/20 
-                         transition-colors"
+                className="p-2 rounded-lg glass-enhanced hover:border-white/20 
+                         transition-all duration-300"
               >
                 <Share2 className="w-5 h-5" />
               </motion.button>
@@ -111,12 +112,12 @@ const SingleBlogPage = () => {
               <motion.h1
                 initial={{ y: -20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                className="text-4xl font-bold"
+                className="text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary"
               >
                 {post.title}
               </motion.h1>
 
-              <div className="flex flex-wrap gap-4 text-sm text-white/60">
+              <div className="flex flex-wrap gap-4 text-sm text-text-secondary">
                 <div className="flex items-center gap-2">
                   <Calendar className="w-4 h-4" />
                   {new Date(post.date).toLocaleDateString('en-US', {
@@ -135,8 +136,10 @@ const SingleBlogPage = () => {
                 {post.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="flex items-center gap-1 px-3 py-1 text-sm
-                             bg-white/10 rounded-full"
+                    className="flex items-center gap-1 px-3 py-1.5 text-sm
+                             bg-white/5 hover:bg-white/10 rounded-full border border-white/10
+                             hover:border-white/20 transition-all duration-200
+                             text-text-secondary"
                   >
                     <Tag className="w-3 h-3" />
                     {tag}
@@ -158,7 +161,7 @@ const SingleBlogPage = () => {
           {/* Related Posts */}
           {relatedPosts.length > 0 && (
             <div className="mt-16 space-y-8">
-              <h2 className="text-2xl font-bold">Related Posts</h2>
+              <h2 className="text-2xl lg:text-3xl font-bold text-text-primary">Related Posts</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {relatedPosts.map((relatedPost) => (
                   <Link
@@ -168,21 +171,22 @@ const SingleBlogPage = () => {
                   >
                     <motion.div
                       whileHover={{ y: -5 }}
-                      className="bg-white/10 rounded-lg overflow-hidden"
+                      className="glass-enhanced rounded-xl overflow-hidden card-hover"
                     >
                       <div className="aspect-video">
                         <img
                           src={relatedPost.image}
                           alt={relatedPost.title}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover transition-transform duration-500
+                                   group-hover:scale-110"
                         />
                       </div>
-                      <div className="p-4">
+                      <div className="p-4 lg:p-6">
                         <h3 className="font-bold group-hover:text-blue-400 
-                                   transition-colors">
+                                   transition-colors text-text-primary">
                           {relatedPost.title}
                         </h3>
-                        <p className="text-sm text-white/60 mt-2">
+                        <p className="text-sm text-text-secondary mt-2">
                           {relatedPost.description}
                         </p>
                       </div>

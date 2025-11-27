@@ -33,7 +33,7 @@ Allow: /
 Disallow:
 
 # Sitemap location
-Sitemap: https://blsthathsara.me/sitemap.xml
+Sitemap: https://savithathsara.me/sitemap.xml
 
 # Crawl-delay to prevent overwhelming the server
 Crawl-delay: 1
@@ -63,43 +63,43 @@ cat > dist/sitemap.xml << EOL
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://blsthathsara.me/</loc>
+    <loc>https://savithathsara.me/</loc>
     <lastmod>$(date +%Y-%m-%d)</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://blsthathsara.me/about</loc>
+    <loc>https://savithathsara.me/about</loc>
     <lastmod>$(date +%Y-%m-%d)</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://blsthathsara.me/projects</loc>
+    <loc>https://savithathsara.me/projects</loc>
     <lastmod>$(date +%Y-%m-%d)</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://blsthathsara.me/blog</loc>
+    <loc>https://savithathsara.me/blog</loc>
     <lastmod>$(date +%Y-%m-%d)</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://blsthathsara.me/contact</loc>
+    <loc>https://savithathsara.me/contact</loc>
     <lastmod>$(date +%Y-%m-%d)</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://blsthathsara.me/resume</loc>
+    <loc>https://savithathsara.me/resume</loc>
     <lastmod>$(date +%Y-%m-%d)</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://blsthathsara.me/playground</loc>
+    <loc>https://savithathsara.me/playground</loc>
     <lastmod>$(date +%Y-%m-%d)</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

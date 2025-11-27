@@ -11,7 +11,7 @@ const NotFoundPage = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="min-h-screen flex items-center justify-center p-8"
+      className="min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-8 pb-32"
     >
       <div className="text-center space-y-8">
         <motion.h1
@@ -28,8 +28,8 @@ const NotFoundPage = () => {
           transition={{ delay: 0.2 }}
           className="space-y-4"
         >
-          <h2 className="text-2xl font-bold">Page Not Found</h2>
-          <p className="text-white/60">
+          <h2 className="text-2xl sm:text-3xl font-bold text-text-primary">Page Not Found</h2>
+          <p className="text-text-secondary">
             The page you're looking for doesn't exist or has been moved.
           </p>
 
@@ -37,8 +37,9 @@ const NotFoundPage = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => navigate('/')}
-            className="inline-flex items-center gap-2 px-6 py-3 bg-white/10
-                     hover:bg-white/20 rounded-lg transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 glass-enhanced
+                     hover:border-white/20 rounded-lg transition-all duration-300
+                     font-medium text-text-primary hover:shadow-lg"
           >
             <Home className="w-5 h-5" />
             Back to Home
