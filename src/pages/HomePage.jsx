@@ -27,13 +27,13 @@ const HomePage = () => {
     <>
       <SEO
         title="AI & Automation Engineer"
-        description={profile.shortBio}
+        description={`${profile.shortBio} ${profile.availability}.`}
         keywords={[
-          'AI Automation',
+          'AI Automation Engineer London',
           'Process Automation',
-          'London',
-          'UI UX',
-          'Northumbria University',
+          'AWS Automation',
+          'Northumbria University AI',
+          'hire AI engineer UK',
         ]}
       />
 

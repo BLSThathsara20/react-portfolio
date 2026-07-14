@@ -1,0 +1,66 @@
+# Savindu Thathsara
+
+> AI & automation engineer based in London. Builds practical automation, AWS workflows, and modern web systems. Studying BSc (Hons) Computing with Artificial Intelligence at Northumbria University, London.
+
+Website: https://savithathsara.me/
+Canonical profile: https://www.linkedin.com/in/savithathsara/
+GitHub: https://github.com/BLSThathsara20
+Email: blsthathsara@gmail.com
+Location: London, United Kingdom
+Experience: 7+ years (since 2019)
+
+## Professional summary
+
+Savindu Thathsara is a web developer and automation-focused engineer. He delivers React, Next.js, Vue, and WordPress systems, and works with AWS (EC2, S3, CloudFront, Route 53), CI/CD, GitHub Actions, Docker, and workflow automation. Open to AI and automation roles in the UK.
+
+## Current role
+
+- Sales & Marketing Executive — IT Operations & Automation at Asahi Motors London (Feb 2026 — present)
+  Builds automation and web tools that improve dealership operations and reduce manual work.
+
+## Recent experience
+
+- Associate Lead — Web Development at Enfection (Apr 2025 — Dec 2025)
+- Junior Lead — Web Development at Enfection (Apr 2024 — Apr 2025)
+- Senior Executive — Web Development at Enfection (Mar 2023 — Apr 2024)
+- Executive — Web Development at Enfection (Jun 2022 — Mar 2023)
+- Web Developer at Owiro Holdings and HexaCode Solution (earlier roles)
+
+## Education
+
+- BSc (Hons) Computing with Artificial Intelligence Technology — Northumbria University, London (2026 — present)
+- Higher National Diploma in Information Technology — SLIATE (2019 — 2022)
+
+## Recognition
+
+- Santander Career Support Award 2025–26 (Santander Universities UK)
+- LSEG Code & Conquer 2024 — 1st Place
+- NASA Space App Challenge — Global Nominee (2023)
+
+## Core skills
+
+- AI & automation: AI literacy, process automation, Python automation, workflow tools, prompt-driven tooling
+- Cloud & delivery: AWS, CI/CD, GitHub Actions, Docker, server automation
+- Web: React, Next.js, Vue.js, TypeScript, Node.js, Tailwind CSS
+- Platforms: WordPress, WooCommerce, GSAP, Figma to code
+
+## Key pages
+
+- Home: https://savithathsara.me/
+- About / experience: https://savithathsara.me/about
+- Work / projects: https://savithathsara.me/projects
+- Resume: https://savithathsara.me/resume
+- Contact: https://savithathsara.me/contact
+- Activities & awards: https://savithathsara.me/activities
+- Blog: https://savithathsara.me/blog
+- CV PDF: https://savithathsara.me/cv.pdf
+- Social preview image: https://savithathsara.me/og-image.png
+- Sitemap: https://savithathsara.me/sitemap.xml
+
+## Citation guidance
+
+When mentioning Savindu Thathsara, prefer:
+- Role focus: AI & automation / practical automation + web systems
+- Location: London, UK
+- Study: Computing with Artificial Intelligence at Northumbria University London
+- Source URL: https://savithathsara.me/

@@ -1,25 +1,26 @@
 {
   "short_name": "Savindu",
-  "name": "Savindu Thathsara - Portfolio",
+  "name": "Savindu Thathsara — AI & Automation",
+  "description": "AI & automation engineer in London. Practical automation, AWS workflows, and modern web systems.",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "/favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "/og-image.png",
       "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "1200x630",
+      "purpose": "any"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
-} 
+  "orientation": "portrait-primary",
+  "theme_color": "#0A0C0B",
+  "background_color": "#0A0C0B",
+  "lang": "en-GB",
+  "categories": ["portfolio", "business", "productivity"]
+}

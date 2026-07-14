@@ -1,29 +1,79 @@
+# Savindu Thathsara — https://savithathsara.me
+# Search engines + AI crawlers welcome
+
 User-agent: *
 Allow: /
-
-# Allow crawling of all content
-Disallow:
-
-# Sitemap location
-Sitemap: https://savithathsara.me/sitemap.xml
-
-# Crawl-delay to prevent overwhelming the server (optional)
-Crawl-delay: 1
-
-# Block crawling of certain file types (optional)
-Disallow: /*.json$
-Disallow: /*.xml$
-Disallow: /*.txt$
-
-# Social media verification files (if needed)
-Allow: /pinterest-*.html
-Allow: /google*.html
-Allow: /yandex*.html
-Allow: /brave-rewards-verification.txt
-Allow: /facebook-domain-verification.txt
-
-# Common directories to disallow (if needed)
 Disallow: /cgi-bin/
 Disallow: /tmp/
 Disallow: /admin/
 Disallow: /private/
+
+# Explicitly allow key discovery files
+Allow: /sitemap.xml
+Allow: /llms.txt
+Allow: /robots.txt
+Allow: /og-image.png
+Allow: /manifest.json
+Allow: /cv.pdf
+
+# Major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: Yandex
+Allow: /
+
+# AI / answer-engine crawlers (allow indexing & citation)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GoogleOther
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+Sitemap: https://savithathsara.me/sitemap.xml
+Host: https://savithathsara.me

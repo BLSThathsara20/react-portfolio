@@ -1,0 +1,14 @@
+/* TEAM */
+Name: Savindu Thathsara
+Role: AI & Automation Engineer
+Location: London, United Kingdom
+Site: https://savithathsara.me/
+LinkedIn: https://www.linkedin.com/in/savithathsara/
+GitHub: https://github.com/BLSThathsara20
+Contact: blsthathsara@gmail.com
+
+/* SITE */
+Last update: 2026-07-14
+Standards: HTML5, CSS3, ES Modules
+Components: React, Vite, Tailwind CSS, Framer Motion
+Language: English (en-GB)
