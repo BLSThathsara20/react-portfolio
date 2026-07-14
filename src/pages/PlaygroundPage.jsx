@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles } from 'lucide-react';
 import SEO from '../components/SEO';
 import InnovationCard from '../components/InnovationCard';
 import ProjectModal from '../components/ProjectModal';
@@ -33,24 +32,20 @@ const PlaygroundPage = () => {
         description="Explore my latest experiments and innovative projects in web development, AI, and creative coding."
       />
 
-      <div className="min-h-screen p-4 sm:p-6 lg:p-8 pt-20 pb-32">
-        <div className="max-w-7xl mx-auto pb-8">
+      <div className="page-shell section-pad">
+        <div className="container-narrow pb-8">
           {/* Header Section */}
-          <motion.div
+        <motion.div
             initial={{ y: -20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            className="text-center mb-16"
-          >
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <Sparkles className="w-8 h-8 text-blue-400" />
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary">Innovation Playground</h1>
-              <Sparkles className="w-8 h-8 text-blue-400" />
-            </div>
-            <p className="text-lg sm:text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed">
-              Welcome to my experimental space where I push the boundaries of web technology
-              and create unique digital experiences.
-            </p>
-          </motion.div>
+          animate={{ y: 0, opacity: 1 }}
+            className="mb-16 max-w-2xl"
+        >
+            <p className="eyebrow mb-4">Experiments</p>
+              <h1 className="section-title mb-4">Innovation playground</h1>
+            <p className="body-lg">
+              A quieter space for experiments and side projects — secondary to the core AI & automation work.
+          </p>
+        </motion.div>
 
           {/* Innovations Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -67,17 +62,17 @@ const PlaygroundPage = () => {
           {/* Loading State */}
           {loading && (
             <div className="flex items-center justify-center py-20">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white" />
-            </div>
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-accent" />
+  </div>
           )}
 
           {/* Empty State */}
           {!loading && innovations.length === 0 && (
             <div className="text-center py-20">
-              <p className="text-white/60">No innovations found.</p>
-            </div>
+              <p className="text-ink-muted">No innovations found.</p>
+      </div>
           )}
-        </div>
+          </div>
       </div>
 
       {/* Project Detail Modal */}

@@ -10,20 +10,17 @@ const Notification = ({ isOpen, onClose, message }) => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
-          className="fixed top-4 right-4 z-50 max-w-sm"
+          className="fixed top-20 right-4 z-50 max-w-sm"
         >
-          <div className="bg-green-500/20 backdrop-blur-lg rounded-lg p-4 shadow-lg
-                       border border-green-500/20">
+          <div className="bg-surface-raised rounded-md p-4 shadow-soft border border-accent/30">
             <div className="flex items-start gap-3">
-              <div className="flex-shrink-0">
-                <Check className="w-5 h-5 text-green-400" />
-              </div>
-              <div className="flex-1">
-                <p className="text-sm text-white">{message}</p>
-              </div>
+              <Check className="w-5 h-5 text-accent shrink-0" />
+              <p className="flex-1 text-sm font-sans text-ink">{message}</p>
               <button
+                type="button"
                 onClick={onClose}
-                className="flex-shrink-0 text-white/60 hover:text-white"
+                className="text-ink-muted hover:text-ink"
+                aria-label="Close"
               >
                 <X className="w-5 h-5" />
               </button>

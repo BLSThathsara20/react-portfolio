@@ -11,40 +11,18 @@ const NotFoundPage = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-8 pb-32"
+      className="min-h-[70vh] flex items-center justify-center section-pad"
     >
-      <div className="text-center space-y-8">
-        <motion.h1
-          initial={{ y: -20 }}
-          animate={{ y: 0 }}
-          className="text-8xl font-bold text-white/20"
-        >
-          404
-        </motion.h1>
-        
-        <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className="space-y-4"
-        >
-          <h2 className="text-2xl sm:text-3xl font-bold text-text-primary">Page Not Found</h2>
-          <p className="text-text-secondary">
-            The page you're looking for doesn't exist or has been moved.
-          </p>
-
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => navigate('/')}
-            className="inline-flex items-center gap-2 px-6 py-3 glass-enhanced
-                     hover:border-white/20 rounded-lg transition-all duration-300
-                     font-medium text-text-primary hover:shadow-lg"
-          >
-            <Home className="w-5 h-5" />
-            Back to Home
-          </motion.button>
-        </motion.div>
+      <div className="text-center space-y-6 max-w-md">
+        <h1 className="font-display text-8xl text-ink/15">404</h1>
+        <h2 className="font-display text-3xl text-ink">Page not found</h2>
+        <p className="body-lg">
+          The page you’re looking for doesn’t exist or has been moved.
+        </p>
+        <button type="button" onClick={() => navigate('/')} className="btn-primary">
+          <Home className="w-4 h-4" />
+          Back home
+        </button>
       </div>
     </motion.div>
   );

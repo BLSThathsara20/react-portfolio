@@ -1,486 +1,272 @@
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
-	Send,
-	Loader2,
-	Github,
-	Linkedin,
-	Mail,
-	Globe,
-	MessageSquare,
-	AlertCircle,
-	CheckCircle2,
-	Sparkles,
-	ExternalLink,
-	MessageCircle,
-	Phone,
-} from "lucide-react";
-import emailjs from "@emailjs/browser";
-import SEO from "../components/SEO";
+  Send,
+  Loader2,
+  Github,
+  Linkedin,
+  Mail,
+  AlertCircle,
+  CheckCircle2,
+  MessageCircle,
+} from 'lucide-react';
+import emailjs from '@emailjs/browser';
+import SEO from '../components/SEO';
+import { profile } from '../data/profile';
 
 const ContactPage = () => {
-	const [formState, setFormState] = useState({
-		name: "",
-		email: "",
-		subject: "",
-		message: "",
-	});
+  const [formState, setFormState] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+  });
+  const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
+  const [focusedField, setFocusedField] = useState(null);
 
-	const [errors, setErrors] = useState({});
-	const [isSubmitting, setIsSubmitting] = useState(false);
-	const [submitStatus, setSubmitStatus] = useState(null);
-	const [focusedField, setFocusedField] = useState(null);
+  const contactMethods = [
+    {
+      name: 'Email',
+      icon: Mail,
+      value: profile.email,
+      link: profile.links.email,
+      description: 'Best for opportunities',
+    },
+    {
+      name: 'LinkedIn',
+      icon: Linkedin,
+      value: 'linkedin.com/in/savithathsara',
+      link: profile.links.linkedin,
+      description: 'Professional network',
+    },
+    {
+      name: 'GitHub',
+      icon: Github,
+      value: 'BLSThathsara20',
+      link: profile.links.github,
+      description: 'Code & experiments',
+    },
+    {
+      name: 'WhatsApp',
+      icon: MessageCircle,
+      value: 'Quick message',
+      link: profile.links.whatsapp,
+      description: 'Fast response',
+    },
+  ];
 
-	const contactMethods = [
-		{
-			name: "Email",
-			icon: Mail,
-			value: "blsthathsara@gmail.com",
-			link: "mailto:blsthathsara@gmail.com",
-			color: "hover:text-purple-400",
-			description: "Feel free to email me anytime",
-		},
-		{
-			name: "WhatsApp",
-			icon: MessageCircle,
-			value: "+94 76 406 7093", // Replace with your actual number
-			link: "https://wa.me/94764067093?text=Hi%20Savindu,%20I%20found%20your%20portfolio%20interesting%20and%20would%20like%20to%20connect%20with%20you.",
-			color: "hover:text-green-400",
-			description: "Quick response via WhatsApp",
-		},
-		{
-			name: "LinkedIn",
-			icon: Linkedin,
-			value: "linkedin.com/in/blsthathsara",
-			link: "https://linkedin.com/in/blsthathsara",
-			color: "hover:text-blue-400",
-			description: "Connect with me professionally",
-		},
-		{
-			name: "LinkTree",
-			icon: ExternalLink,
-			value: "linktr.ee/Savinduthathsara",
-			link: "https://linktr.ee/Savinduthathsara",
-			color: "hover:text-green-500",
-			description: "Find all my social links",
-		},
-	];
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formState.name.trim()) newErrors.name = 'Please enter your name';
+    else if (formState.name.length < 2) newErrors.name = 'Name must be at least 2 characters';
+    if (!formState.email.trim()) newErrors.email = 'Please enter your email';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formState.email))
+      newErrors.email = 'Please enter a valid email address';
+    if (!formState.subject.trim()) newErrors.subject = 'Please enter a subject';
+    else if (formState.subject.length < 4)
+      newErrors.subject = 'Subject must be at least 4 characters';
+    if (!formState.message.trim()) newErrors.message = 'Please enter your message';
+    else if (formState.message.length < 10)
+      newErrors.message = 'Message must be at least 10 characters';
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
-	// Form validation rules
-	const validateForm = () => {
-		const newErrors = {};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!validateForm()) {
+      setSubmitStatus('error');
+      setTimeout(() => setSubmitStatus(null), 3000);
+      return;
+    }
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+    try {
+      await emailjs.send(
+        'service_pdj6b5w',
+        'template_fv0heep',
+        {
+          from_name: formState.name,
+          from_email: formState.email,
+          subject: formState.subject,
+          message: formState.message,
+          to_email: profile.email,
+        },
+        'hLt3-AGSDqAix159e'
+      );
+      setSubmitStatus('success');
+      setFormState({ name: '', email: '', subject: '', message: '' });
+    } catch (error) {
+      console.error('Email sending failed:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+      setTimeout(() => setSubmitStatus(null), 5000);
+    }
+  };
 
-		if (!formState.name.trim()) {
-			newErrors.name = "Please enter your name";
-		} else if (formState.name.length < 2) {
-			newErrors.name = "Name must be at least 2 characters";
-		}
+  const fieldClass = (name) =>
+    `w-full px-4 py-3 bg-surface-raised border rounded-md font-sans text-ink
+     focus:outline-none focus:ring-2 transition-all duration-200
+     ${
+       errors[name]
+         ? 'border-red-400 focus:ring-red-400/20'
+         : 'border-border focus:border-accent focus:ring-accent/20'
+     }`;
 
-		if (!formState.email.trim()) {
-			newErrors.email = "Please enter your email";
-		} else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formState.email)) {
-			newErrors.email = "Please enter a valid email address";
-		}
+  return (
+    <>
+      <SEO
+        title="Contact"
+        description={`Contact ${profile.name} about AI automation, web systems, or collaboration opportunities in London.`}
+        keywords={['Contact', 'Hire', 'AI Automation', 'London']}
+      />
 
-		if (!formState.subject.trim()) {
-			newErrors.subject = "Please enter a subject";
-		} else if (formState.subject.length < 4) {
-			newErrors.subject = "Subject must be at least 4 characters";
-		}
+      <div className="page-shell">
+        <section className="section-pad">
+          <div className="container-narrow grid lg:grid-cols-2 gap-12 lg:gap-16">
+            <div>
+              <p className="eyebrow mb-4">Contact</p>
+              <h1 className="display-title text-4xl sm:text-5xl md:text-6xl mb-6">
+                Let’s talk
+              </h1>
+              <p className="body-lg mb-10 max-w-md">
+                Open to AI & automation roles, workflow engineering, and projects that
+                blend delivery with intelligent systems. {profile.location}.
+              </p>
 
-		if (!formState.message.trim()) {
-			newErrors.message = "Please enter your message";
-		} else if (formState.message.length < 10) {
-			newErrors.message = "Message must be at least 10 characters";
-		}
+              <div className="grid sm:grid-cols-2 gap-3">
+                {contactMethods.map((method) => (
+                  <a
+                    key={method.name}
+                    href={method.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group border border-border bg-surface-raised p-4 hover:border-accent/40 transition-colors"
+                  >
+                    <div className="flex items-center gap-2 mb-2 text-ink">
+                      <method.icon className="w-4 h-4 text-accent" />
+                      <span className="font-sans text-sm font-medium">{method.name}</span>
+                    </div>
+                    <p className="font-sans text-xs text-ink-muted">{method.description}</p>
+                  </a>
+                ))}
+              </div>
+            </div>
 
-		setErrors(newErrors);
-		return Object.keys(newErrors).length === 0;
-	};
+            <form
+              onSubmit={handleSubmit}
+              className="space-y-5 border border-border bg-surface-raised p-6 sm:p-8"
+            >
+              {[
+                { name: 'name', label: 'Name', type: 'text' },
+                { name: 'email', label: 'Email', type: 'email' },
+                { name: 'subject', label: 'Subject', type: 'text' },
+              ].map((field) => (
+                <div key={field.name}>
+                  <label className="block font-sans text-sm font-medium text-ink mb-1.5">
+                    {field.label}
+                  </label>
+                  <input
+                    type={field.type}
+                    value={formState[field.name]}
+                    onChange={(e) => {
+                      setFormState((prev) => ({ ...prev, [field.name]: e.target.value }));
+                      if (errors[field.name])
+                        setErrors((prev) => ({ ...prev, [field.name]: '' }));
+                    }}
+                    onFocus={() => setFocusedField(field.name)}
+                    onBlur={() => setFocusedField(null)}
+                    className={fieldClass(field.name)}
+                  />
+                  {errors[field.name] && (
+                    <p className="flex items-center gap-1 text-sm text-red-500 mt-1">
+                      <AlertCircle className="w-3.5 h-3.5" />
+                      {errors[field.name]}
+                    </p>
+                  )}
+                </div>
+              ))}
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
+              <div>
+                <label className="block font-sans text-sm font-medium text-ink mb-1.5">
+                  Message
+                </label>
+                <textarea
+                  rows={6}
+                  value={formState.message}
+                  onChange={(e) => {
+                    setFormState((prev) => ({ ...prev, message: e.target.value }));
+                    if (errors.message) setErrors((prev) => ({ ...prev, message: '' }));
+                  }}
+                  onFocus={() => setFocusedField('message')}
+                  onBlur={() => setFocusedField(null)}
+                  className={`${fieldClass('message')} resize-none`}
+                />
+                {errors.message && (
+                  <p className="flex items-center gap-1 text-sm text-red-500 mt-1">
+                    <AlertCircle className="w-3.5 h-3.5" />
+                    {errors.message}
+                  </p>
+                )}
+              </div>
 
-		if (!validateForm()) {
-			setSubmitStatus("error");
-			setTimeout(() => setSubmitStatus(null), 3000);
-			return;
-		}
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="btn-primary w-full disabled:opacity-50"
+              >
+                {isSubmitting ? (
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                ) : (
+                  <>
+                    Send message
+                    <Send className="w-4 h-4" />
+                  </>
+                )}
+              </button>
+            </form>
+          </div>
+        </section>
 
-		setIsSubmitting(true);
-		setSubmitStatus(null);
-
-		try {
-			await emailjs.send(
-				"service_pdj6b5w",
-				"template_fv0heep",
-				{
-					from_name: formState.name,
-					from_email: formState.email,
-					subject: formState.subject,
-					message: formState.message,
-					to_email: "blsthathsara@gmail.com",
-				},
-				"hLt3-AGSDqAix159e"
-			);
-
-			setSubmitStatus("success");
-			setFormState({
-				name: "",
-				email: "",
-				subject: "",
-				message: "",
-			});
-		} catch (error) {
-			console.error("Email sending failed:", error);
-			setSubmitStatus("error");
-		} finally {
-			setIsSubmitting(false);
-			setTimeout(() => setSubmitStatus(null), 5000);
-		}
-	};
-
-	const containerVariants = {
-		hidden: { opacity: 0 },
-		visible: {
-			opacity: 1,
-			transition: {
-				staggerChildren: 0.1,
-				delayChildren: 0.2,
-			},
-		},
-	};
-
-	const itemVariants = {
-		hidden: { y: 20, opacity: 0 },
-		visible: {
-			y: 0,
-			opacity: 1,
-			transition: {
-				type: "spring",
-				stiffness: 100,
-			},
-		},
-	};
-
-	return (
-		<>
-			<SEO
-				title="Contact Me - Savindu Thaththsara"
-				description="Get in touch with me for collaboration opportunities, project inquiries, or just to say hello!"
-				keywords={[
-					"contact",
-					"frontend developer",
-					"web developer",
-					"hire developer",
-				]}
-			/>
-
-			<motion.div
-				initial={{ opacity: 0 }}
-				animate={{ opacity: 1 }}
-				exit={{ opacity: 0 }}
-				className="min-h-screen p-4 sm:p-6 lg:p-8 pb-32"
-			>
-				<div className="max-w-6xl mx-auto pt-20 pb-8">
-					<motion.div
-						variants={containerVariants}
-						initial="hidden"
-						animate="visible"
-						className="grid grid-cols-1 lg:grid-cols-2 gap-12"
-					>
-						{/* Contact Info Section */}
-						<motion.div variants={itemVariants} className="space-y-8">
-							<div className="relative">
-								<motion.div
-									className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 
-                           rounded-lg blur-lg opacity-75"
-									animate={{
-										scale: [1, 1.1, 1],
-										rotate: [0, 5, 0],
-									}}
-									transition={{
-										duration: 4,
-										repeat: 9999,
-										repeatType: "loop",
-										ease: "easeInOut",
-									}}
-								/>
-								<div className="relative bg-background/80 backdrop-blur-sm rounded-lg p-6 border border-white/10">
-									<div className="flex items-center gap-3 mb-4">
-										<MessageSquare className="w-6 h-6 text-blue-400" />
-										<h1 className="text-2xl sm:text-3xl font-bold text-text-primary">Let's Connect</h1>
-									</div>
-									<p className="text-base sm:text-lg text-text-secondary leading-relaxed">
-										I'm always open to discussing new projects, creative ideas,
-										or opportunities to be part of your visions.
-									</p>
-								</div>
-							</div>
-
-							{/* Contact Methods */}
-							<div className="grid grid-cols-2 gap-4">
-								{contactMethods.map((method, index) => (
-									<motion.a
-										key={method.name}
-										variants={itemVariants}
-										whileHover={{ y: -5 }}
-										href={method.link}
-										target="_blank"
-										rel="noopener noreferrer"
-										className="group relative overflow-hidden"
-									>
-										<motion.div
-											className={`absolute inset-0 bg-gradient-to-r ${method.color} opacity-0 
-                               group-hover:opacity-100 transition-opacity duration-300`}
-											animate={{
-												scale: [1, 1.2, 1],
-												rotate: [0, 5, 0],
-											}}
-											transition={{
-												duration: 3,
-												repeat: 9999,
-												repeatType: "loop",
-												ease: "easeInOut",
-											}}
-										/>
-										<div
-											className="relative bg-white/10 backdrop-blur-sm rounded-lg p-4 
-                                border border-white/10 group-hover:border-white/20
-                                transition-colors"
-										>
-											<div className="flex items-center gap-3">
-												<method.icon className="w-5 h-5" />
-												<span className="font-medium">{method.name}</span>
-											</div>
-										</div>
-									</motion.a>
-								))}
-							</div>
-						</motion.div>
-
-						{/* Contact Form */}
-						<motion.form
-							variants={itemVariants}
-							onSubmit={handleSubmit}
-							className="relative space-y-6 bg-white/10 backdrop-blur-sm rounded-xl p-6 
-                       border border-white/10"
-						>
-							{/* Form fields */}
-							{[
-								{ name: "name", label: "Name", type: "text" },
-								{ name: "email", label: "Email", type: "email" },
-								{ name: "subject", label: "Subject", type: "text" },
-							].map((field) => (
-								<div key={field.name} className="space-y-1">
-									<label className="block text-sm font-medium pl-1">
-										{field.label}
-									</label>
-									<motion.div
-										animate={
-											focusedField === field.name
-												? { scale: 1.02 }
-												: { scale: 1 }
-										}
-									>
-										<input
-											type={field.type}
-											value={formState[field.name]}
-											onChange={(e) => {
-												setFormState((prev) => ({
-													...prev,
-													[field.name]: e.target.value,
-												}));
-												if (errors[field.name]) {
-													setErrors((prev) => ({
-														...prev,
-														[field.name]: "",
-													}));
-												}
-											}}
-											onFocus={() => setFocusedField(field.name)}
-											onBlur={() => setFocusedField(null)}
-											className={`w-full px-4 py-3 bg-white/5 border rounded-lg
-                               focus:outline-none focus:ring-2 transition-all duration-300
-                               ${
-																	errors[field.name]
-																		? "border-red-500/50 focus:border-red-500/50 focus:ring-red-500/20"
-																		: "border-white/10 focus:border-blue-500/50 focus:ring-blue-500/20"
-																}`}
-										/>
-										<AnimatePresence>
-											{errors[field.name] && (
-												<motion.p
-													initial={{ opacity: 0, y: -10 }}
-													animate={{ opacity: 1, y: 0 }}
-													exit={{ opacity: 0, y: -10 }}
-													className="flex items-center gap-1 text-sm text-red-400 mt-1 pl-1"
-												>
-													<AlertCircle className="w-4 h-4" />
-													{errors[field.name]}
-												</motion.p>
-											)}
-										</AnimatePresence>
-									</motion.div>
-								</div>
-							))}
-
-							{/* Message textarea */}
-							<div className="space-y-1">
-								<label className="block text-sm font-medium pl-1">
-									Message
-								</label>
-								<motion.div
-									animate={
-										focusedField === "message" ? { scale: 1.02 } : { scale: 1 }
-									}
-								>
-									<textarea
-										rows={6}
-										value={formState.message}
-										onChange={(e) => {
-											setFormState((prev) => ({
-												...prev,
-												message: e.target.value,
-											}));
-											if (errors.message) {
-												setErrors((prev) => ({
-													...prev,
-													message: "",
-												}));
-											}
-										}}
-										onFocus={() => setFocusedField("message")}
-										onBlur={() => setFocusedField(null)}
-										className={`w-full px-4 py-3 bg-white/5 border rounded-lg
-                             focus:outline-none focus:ring-2 transition-all duration-300
-                             resize-none
-                             ${
-																errors.message
-																	? "border-red-500/50 focus:border-red-500/50 focus:ring-red-500/20"
-																	: "border-white/10 focus:border-blue-500/50 focus:ring-blue-500/20"
-															}`}
-									/>
-									<AnimatePresence>
-										{errors.message && (
-											<motion.p
-												initial={{ opacity: 0, y: -10 }}
-												animate={{ opacity: 1, y: 0 }}
-												exit={{ opacity: 0, y: -10 }}
-												className="flex items-center gap-1 text-sm text-red-400 mt-1 pl-1"
-											>
-												<AlertCircle className="w-4 h-4" />
-												{errors.message}
-											</motion.p>
-										)}
-									</AnimatePresence>
-								</motion.div>
-							</div>
-
-							{/* Submit Button */}
-							<motion.button
-								whileHover={{ scale: 1.02 }}
-								whileTap={{ scale: 0.98 }}
-								disabled={isSubmitting}
-								className="w-full py-3 px-6 rounded-lg bg-gradient-to-r 
-                         from-blue-500/20 via-purple-500/20 to-blue-500/20 
-                         hover:from-blue-500/30 hover:via-purple-500/30 hover:to-blue-500/30
-                         border border-white/10 hover:border-white/20
-                         flex items-center justify-center gap-2 
-                         disabled:opacity-50 disabled:cursor-not-allowed
-                         group relative overflow-hidden"
-							>
-								{/* Animated background */}
-								<motion.div
-									className="absolute inset-0 -z-10"
-									animate={{
-										backgroundPosition: ["200% 0%", "-200% 0%"],
-									}}
-									transition={{
-										duration: 3,
-										repeat: 9999,
-										repeatType: "loop",
-										ease: "linear",
-									}}
-									style={{
-										background:
-											"linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent)",
-										backgroundSize: "200% 100%",
-									}}
-								/>
-
-								{isSubmitting ? (
-									<Loader2 className="w-5 h-5 animate-spin" />
-								) : (
-									<>
-										Send Message
-										<Send className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-									</>
-								)}
-							</motion.button>
-						</motion.form>
-					</motion.div>
-
-					{/* Status Messages */}
-					<AnimatePresence>
-						{submitStatus && (
-							<motion.div
-								initial={{ opacity: 0, y: 50 }}
-								animate={{ opacity: 1, y: 0 }}
-								exit={{ opacity: 0, y: 50 }}
-								className={`fixed bottom-4 right-4 max-w-md px-6 py-4 rounded-lg backdrop-blur-lg
-                          border flex items-center gap-3
-                          ${
-														submitStatus === "success"
-															? "bg-green-500/20 border-green-500/20"
-															: "bg-red-500/20 border-red-500/20"
-													}`}
-							>
-								{submitStatus === "success" ? (
-									<>
-										<CheckCircle2 className="w-5 h-5 text-green-400" />
-										<div>
-											<h3 className="font-medium">
-												Message sent successfully!
-											</h3>
-											<p className="text-sm text-white/60">
-												I'll get back to you soon.
-											</p>
-										</div>
-									</>
-								) : (
-									<>
-										<AlertCircle className="w-5 h-5 text-red-400" />
-										<div>
-											<h3 className="font-medium">Failed to send message</h3>
-											<p className="text-sm text-white/60">
-												Please try again later.
-											</p>
-										</div>
-									</>
-								)}
-
-								{/* Success sparkles animation */}
-								{submitStatus === "success" && (
-									<motion.div
-										initial={{ scale: 0 }}
-										animate={{ scale: [0, 1.2, 0] }}
-										transition={{
-											duration: 0.5,
-											times: [0, 0.5, 1],
-											repeat: 2,
-											repeatDelay: 0.5,
-										}}
-										className="absolute -inset-1 bg-green-500/20 rounded-lg blur-lg"
-									/>
-								)}
-							</motion.div>
-						)}
-					</AnimatePresence>
-				</div>
-			</motion.div>
-		</>
-	);
+        <AnimatePresence>
+          {submitStatus && (
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 40 }}
+              className={`fixed bottom-6 right-6 max-w-sm px-5 py-4 rounded-md border shadow-soft flex items-start gap-3 bg-surface-raised z-50
+                ${
+                  submitStatus === 'success'
+                    ? 'border-accent/30'
+                    : 'border-red-300'
+                }`}
+            >
+              {submitStatus === 'success' ? (
+                <>
+                  <CheckCircle2 className="w-5 h-5 text-accent shrink-0" />
+                  <div>
+                    <p className="font-sans font-medium text-ink">Message sent</p>
+                    <p className="font-sans text-sm text-ink-soft">I’ll get back to you soon.</p>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <AlertCircle className="w-5 h-5 text-red-500 shrink-0" />
+                  <div>
+                    <p className="font-sans font-medium text-ink">Couldn’t send</p>
+                    <p className="font-sans text-sm text-ink-soft">Please try again shortly.</p>
+                  </div>
+                </>
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </>
+  );
 };
 
 export default ContactPage;

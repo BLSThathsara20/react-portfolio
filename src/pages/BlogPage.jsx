@@ -343,30 +343,25 @@ const BlogPage = () => {
   return (
     <>
       <SEO
-        title="Blog - Frontend Development Insights"
-        description="Explore my thoughts and insights about web development, modern frontend technologies, and best practices in web design."
-        keywords={['blog', 'frontend development', 'web development', 'React', 'JavaScript']}
+        title="Blog"
+        description="Notes on AI, automation, and web delivery from Savindu Thathsara."
+        keywords={['blog', 'AI', 'automation', 'web development']}
       />
 
       <Badge status={status} />
 
-      <div className="min-h-screen p-4 sm:p-6 lg:p-8 pb-32">
-        <div className="max-w-4xl mx-auto pt-20 pb-8">
+      <div className="page-shell section-pad">
+        <div className="container-narrow max-w-4xl pb-8">
           {/* Hero Section */}
           <motion.div
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            className="text-center mb-16"
+            className="mb-16 max-w-2xl"
           >
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <BookOpen className="w-8 h-8 text-blue-400" />
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary">Blog & Insights</h1>
-              <BookOpen className="w-8 h-8 text-blue-400" />
-            </div>
-
-            <p className="text-lg sm:text-xl text-text-secondary max-w-2xl mx-auto leading-relaxed">
-              Sharing my experiences, insights, and best practices in frontend development
-              and modern web technologies.
+            <p className="eyebrow mb-4">Writing</p>
+            <h1 className="section-title mb-4">Blog</h1>
+            <p className="body-lg">
+              Thinking in public about AI, automation, and shipping reliable web systems.
             </p>
           </motion.div>
 
@@ -381,7 +376,7 @@ const BlogPage = () => {
               {[1, 2, 3].map((n) => (
                 <div 
                   key={n}
-                  className="animate-pulse bg-white/5 rounded-xl h-64"
+                  className="animate-pulse bg-surface-muted rounded-xl h-64"
                 />
               ))}
             </div>
@@ -406,7 +401,7 @@ const BlogPage = () => {
             </div>
           ) : (
             <div className="text-center py-20">
-              <p className="text-white/60">No posts found. Please try again later.</p>
+              <p className="text-ink-muted">No posts found. Please try again later.</p>
             </div>
           )}
         </div>

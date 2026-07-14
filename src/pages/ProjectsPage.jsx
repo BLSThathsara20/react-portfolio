@@ -1,312 +1,150 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Github, Loader2, Code, Book } from 'lucide-react';
-import EmptyState from '../components/EmptyState';
-import Badge from '../components/Badge';
-import { projects } from '../data/projects'; // Import the projects data
-import ErrorBoundary from '../components/ErrorBoundary';
+import { Github, ArrowUpRight } from 'lucide-react';
+import { projects } from '../data/projects';
+import SEO from '../components/SEO';
 
-// Animation variants
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 }
-  }
-};
-
-const ProjectCard = React.forwardRef(({ project, isGithubProject = false }, ref) => {
-  if (isGithubProject) {
-    return (
-      <motion.div
-        ref={ref}
-        layout
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        whileHover={{ y: -5 }}
-        className="group relative bg-white/10 backdrop-blur-lg rounded-xl overflow-hidden"
-      >
-        <div className="p-6 space-y-4">
-          <div className="flex items-start justify-between">
-            <div>
-              <h3 className="text-xl font-bold group-hover:text-blue-400 transition-colors">
-                {project.name}
-              </h3>
-              <p className="text-white/60 mt-2">{project.description || 'No description available'}</p>
-            </div>
-            <Github className="w-6 h-6 text-white/40" />
-          </div>
-
-          {project.languages && (
-            <div className="flex flex-wrap gap-2">
-              {Object.keys(project.languages).map((lang) => (
-                <span
-                  key={lang}
-                  className="px-3 py-1 text-sm bg-white/5 rounded-full"
-                >
-                  {lang}
-                </span>
-              ))}
-            </div>
-          )}
-
-          <div className="flex gap-4 pt-4">
-            <motion.a
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              href={project.html_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 bg-white/10
-                       hover:bg-white/20 rounded-lg transition-colors"
-            >
-              <Code className="w-4 h-4" />
-              View Code
-            </motion.a>
-            {project.homepage && (
-              <motion.a
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                href={project.homepage}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 bg-white/10
-                         hover:bg-white/20 rounded-lg transition-colors"
-              >
-                <ExternalLink className="w-4 h-4" />
-                Live Demo
-              </motion.a>
-            )}
-          </div>
-        </div>
-      </motion.div>
-    );
-  }
-
-  return (
-    <motion.div
-      ref={ref}
-      layout
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      whileHover={{ y: -5 }}
-      className="group relative bg-white/10 backdrop-blur-lg rounded-xl overflow-hidden"
-    >
-      <div className="relative overflow-hidden">
-        <img
-          src={project.image}
-          alt={project.title}
-          className="w-full h-full object-cover transition-transform duration-500
-                   group-hover:scale-110"
-          onError={(e) => {
-            e.target.src = '/api/placeholder/600/300';
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-      </div>
-
-      <div className="p-6 space-y-4">
-        <h3 className="text-xl font-bold">{project.title}</h3>
-        <p className="text-white/60">{project.description}</p>
-
-        <div className="flex flex-wrap gap-2">
-          {project.technologies.map((tech) => (
-            <span
-              key={tech}
-              className="px-3 py-1 text-sm bg-white/5 rounded-full"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
-
-        <div className="flex gap-4 pt-4">
-          {project.liveUrl && (
-            <motion.a
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              href={project.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 bg-white/10
-                       hover:bg-white/20 rounded-lg transition-colors"
-            >
-              <ExternalLink className="w-4 h-4" />
-              Live Demo
-            </motion.a>
-          )}
-          {project.githubUrl && (
-            <motion.a
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 bg-white/10
-                       hover:bg-white/20 rounded-lg transition-colors"
-            >
-              <Github className="w-4 h-4" />
-              Code
-            </motion.a>
-          )}
-        </div>
-      </div>
-    </motion.div>
-  );
-});
-
-ProjectCard.displayName = 'ProjectCard';
+const categories = ['All', 'Automation', 'Web', 'E-commerce', 'JS Framework'];
 
 const ProjectsPage = () => {
-  const [starredRepos, setStarredRepos] = useState([]);
-  const [apiStatus, setApiStatus] = useState('loading');
   const [activeCategory, setActiveCategory] = useState('All');
-  const categories = ['All', 'Web', 'Woocommerce', 'JS Framework', 'GitHub'];
 
-  // Fetch starred repos and their languages
-  useEffect(() => {
-    const fetchStarredRepos = async () => {
-      try {
-        setApiStatus('loading');
-        const response = await fetch(
-          'https://api.github.com/users/BLSThathsara20/starred',
-          {
-            headers: {
-              Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`
-            }
-          }
-        );
-
-        if (!response.ok) throw new Error('Failed to fetch starred repos');
-        const repos = await response.json();
-
-        // Fetch languages for each repo
-        const reposWithLanguages = await Promise.all(
-          repos.map(async (repo) => {
-            const langResponse = await fetch(repo.languages_url, {
-              headers: {
-                Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`
-              }
-            });
-            const languages = await langResponse.json();
-            return { ...repo, languages };
-          })
-        );
-
-        setStarredRepos(reposWithLanguages);
-        setApiStatus('online');
-      } catch (error) {
-        console.error('Error fetching starred repos:', error);
-        setApiStatus('offline');
-      }
-    };
-
-    fetchStarredRepos();
-  }, []);
-
-  const filteredProjects = useMemo(() => {
-    if (activeCategory === 'GitHub') return [];
+  const filtered = useMemo(() => {
     if (activeCategory === 'All') return projects;
-    return projects.filter(project => project.category === activeCategory);
+    return projects.filter((p) => p.category === activeCategory);
   }, [activeCategory]);
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="min-h-screen p-4 sm:p-6 lg:p-8 pb-32"
-    >
-      {/* API Status Badge */}
-      <Badge status={apiStatus} />
+    <>
+      <SEO
+        title="Work"
+        description="Selected automation and web delivery projects by Savindu Thathsara — dealership workflows, NGO platforms, brand sites, and e-commerce."
+        keywords={['Projects', 'Automation', 'Web development', 'UI UX', 'Portfolio']}
+      />
 
-      <div className="max-w-6xl mx-auto pt-20 pb-8">
-        <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          className="space-y-8"
-        >
-         {/* Header */}
-         <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="text-center space-y-6 mb-12 lg:mb-16"
-          >
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <Book className="w-8 h-8 text-blue-400" />
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary">My Projects</h1>
-              <Book className="w-8 h-8 text-blue-400" />
+      <div className="page-shell">
+        <section className="section-pad pb-8">
+          <div className="container-wide max-w-3xl">
+            <p className="eyebrow mb-4">Work</p>
+            <h1 className="display-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-6">
+              Selected systems
+            </h1>
+            <p className="body-lg">
+              Automation wins and shipped interfaces — from operational tooling at Asahi
+              Motors London to brand platforms delivered at scale.
+            </p>
+          </div>
+        </section>
+
+        <section className="section-pad pt-0">
+          <div className="container-wide">
+            <div className="flex flex-wrap gap-2 mb-8 sm:mb-12">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  type="button"
+                  onClick={() => setActiveCategory(category)}
+                  className={`px-4 py-2 rounded-full font-sans text-sm transition-all ${
+                    activeCategory === category
+                      ? 'bg-accent text-surface font-semibold'
+                      : 'border border-border text-ink-soft hover:border-accent/40 hover:text-ink'
+                  }`}
+                >
+                  {category}
+                </button>
+              ))}
             </div>
 
-            <p className="text-lg sm:text-xl text-text-secondary max-w-2xl mx-auto leading-relaxed">
-              A showcase of my frontend development projects, experiments, and GitHub contributions.
-            </p>
-          </motion.div>
+            <div className="grid md:grid-cols-2 gap-4 sm:gap-5">
+              <AnimatePresence mode="popLayout">
+                {filtered.map((project, i) => (
+                  <motion.article
+                    key={project.id}
+                    layout
+                    initial={{ opacity: 1, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ delay: i * 0.03 }}
+                    className={`bento-cell group ${
+                      project.highlight && i === 0 ? 'md:col-span-2' : ''
+                    }`}
+                  >
+                    {project.image ? (
+                      <div className="aspect-[16/9] overflow-hidden border-b border-border">
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                        />
+                      </div>
+                    ) : (
+                      <div className="aspect-[16/9] bg-accent/[0.08] border-b border-border flex items-end p-6 relative overflow-hidden">
+                        <div className="absolute inset-0 grid-fade opacity-50" />
+                        <p className="relative font-display text-3xl font-semibold tracking-tight">
+                          {project.title}
+                        </p>
+                      </div>
+                    )}
 
-
-          {/* Categories */}
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
-            {categories.map((category) => (
-              <motion.button
-                key={category}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setActiveCategory(category)}
-                className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg transition-colors
-                          text-sm sm:text-base
-                          ${activeCategory === category 
-                            ? 'bg-white/20' 
-                            : 'bg-white/5 hover:bg-white/10'}`}
-              >
-                {category === 'GitHub' && <Github className="inline-block w-4 h-4 mr-2" />}
-                {category}
-              </motion.button>
-            ))}
+                    <div className="p-6">
+                      <div className="flex flex-wrap items-center gap-3 mb-2">
+                        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent">
+                          {project.category}
+                        </span>
+                        {project.highlight && (
+                          <span className="font-mono text-[10px] text-ink-muted uppercase tracking-wider">
+                            Featured
+                          </span>
+                        )}
+                      </div>
+                      <h2 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight mb-3">
+                        {project.title}
+                      </h2>
+                      <p className="body-lg text-sm mb-4">{project.description}</p>
+                      <div className="flex flex-wrap gap-2 mb-5">
+                        {project.technologies.map((tech) => (
+                          <span key={tech} className="skill-chip">
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                      <div className="flex flex-wrap gap-4">
+                        {project.liveUrl && (
+                          <a
+                            href={
+                              project.liveUrl.startsWith('http')
+                                ? project.liveUrl
+                                : `https://${project.liveUrl}`
+                            }
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 text-sm font-medium text-ink hover:text-accent"
+                          >
+                            Live site
+                            <ArrowUpRight className="w-3.5 h-3.5" />
+                          </a>
+                        )}
+                        {project.githubUrl && (
+                          <a
+                            href={project.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 text-sm font-medium text-ink-soft hover:text-accent"
+                          >
+                            <Github className="w-3.5 h-3.5" />
+                            Code
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </motion.article>
+                ))}
+              </AnimatePresence>
+            </div>
           </div>
-
-          {/* Projects Grid */}
-          <motion.div
-            layout
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
-          >
-            <AnimatePresence mode="popLayout">
-              {activeCategory === 'GitHub' ? (
-                apiStatus === 'loading' ? (
-                  <div className="col-span-full flex justify-center py-20">
-                    <Loader2 className="w-8 h-8 animate-spin" />
-                  </div>
-                ) : starredRepos.length > 0 ? (
-                  starredRepos.map((repo) => (
-                    <ProjectCard 
-                      key={repo.id} 
-                      project={repo} 
-                      isGithubProject={true} 
-                    />
-                  ))
-                ) : (
-                  <div className="col-span-full">
-                    <EmptyState message="No starred repositories found" />
-                  </div>
-                )
-              ) : filteredProjects.length > 0 ? (
-                filteredProjects.map((project) => (
-                  <ProjectCard key={project.id} project={project} />
-                ))
-              ) : (
-                <div className="col-span-full">
-                  <EmptyState 
-                    message={`No projects found in ${activeCategory} category`} 
-                  />
-                </div>
-              )}
-            </AnimatePresence>
-          </motion.div>
-        </motion.div>
+        </section>
       </div>
-    </motion.div>
+    </>
   );
 };
 

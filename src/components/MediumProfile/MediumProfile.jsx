@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Users } from 'lucide-react';
-import profileImage from '../../assets/unnamed.png';  // Use same profile image
+import profileImage from '../../assets/savindu-thathsara.webp';
 
 const MediumProfile = () => {
   const [followers, setFollowers] = useState(null);

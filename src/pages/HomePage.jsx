@@ -1,528 +1,369 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { ArrowRight, ArrowUpRight, Sparkles } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
+import SignalField from '../components/SignalField';
+import Marquee from '../components/Marquee';
+import profileImage from '../assets/savindu-experience.png';
 import {
-	Github,
-	Linkedin,
-	Mail,
-	ExternalLink,
-	Code,
-	Cloud,
-	Layout,
-	Server,
-	Star,
-	ArrowRight,
-	FileText,
-	Infinity,
-	Award,
-} from "lucide-react";
-import { Link } from "react-router-dom";
-import BackgroundVideo from "../components/BackgroundVideo";
-import SEO from "../components/SEO";
+  profile,
+  skills,
+  experience,
+  education,
+  awards,
+  featuredWork,
+} from '../data/profile';
 
 const HomePage = () => {
-	// Recruiter-focused content hierarchy
-	const heroContent = {
-		title: "Crafting Digital Experiences, Scaling Infinite Possibilities",
-		subtitle: "Building scalable applications & automating infrastructure",
-		description: "5+ years of full-stack development experience, now transitioning to DevOps engineering. Expert in React, Node.js, AWS, Docker, and CI/CD pipelines.",
-		cta: {
-			primary: { text: "View Projects", link: "/projects", icon: Code },
-			secondary: { text: "Download Resume", link: "/cv.pdf", icon: FileText },
-			tertiary: { text: "My Achievements", link: "/activities", icon: Award }
-		}
-	};
+  const recentRoles = experience.slice(0, 3);
+  const marqueeItems = [
+    ...skills.aiAutomation,
+    ...skills.cloud.slice(0, 4),
+    ...skills.web.slice(0, 4),
+  ];
 
-	const coreSkills = {
-		webDev: {
-			title: "Web Development",
-			icon: Layout,
-			color: "blue",
-			description: "5+ years building modern web applications",
-			technologies: [
-				"React/Next.js",
-				"Vue.js",
-				"TypeScript",
-				"Node.js",
-				"Express",
-				"Tailwind CSS",
-				"Framer Motion",
-			],
-		},
-		devops: {
-			title: "DevOps & Cloud",
-			icon: Cloud,
-			color: "purple",
-			description: "Infrastructure automation & cloud solutions",
-			technologies: [
-				"AWS",
-				"Docker",
-				"CI/CD",
-				"Git",
-				"Kubernetes",
-				"Terraform",
-				"Monitoring",
-			],
-		},
-		backend: {
-			title: "Backend & APIs",
-			icon: Server,
-			color: "green",
-			description: "Scalable server-side solutions",
-			technologies: [
-				"Node.js",
-				"Express",
-				"MongoDB",
-				"PostgreSQL",
-				"REST APIs",
-				"GraphQL",
-				"Redis",
-			],
-		},
-	};
+  return (
+    <>
+      <SEO
+        title="AI & Automation Engineer"
+        description={profile.shortBio}
+        keywords={[
+          'AI Automation',
+          'Process Automation',
+          'London',
+          'UI UX',
+          'Northumbria University',
+        ]}
+      />
 
-	const keyProjects = [
-		{
-			title: "Circular Initiative Global",
-			description: "Enterprise CMS with AWS infrastructure, CloudFront CDN, and automated CI/CD pipelines",
-			tech: ["Next.js", "AWS", "CloudFront", "CI/CD", "Docker"],
-			link: "/projects/circular-initiative",
-			featured: true,
-			highlight: "DevOps Focus"
-		},
-		{
-			title: "AI Song Generator",
-			description: "AI-powered application with real-time processing, Redis caching, and scalable architecture",
-			tech: ["React", "Node.js", "TensorFlow", "Redis", "WebSocket"],
-			link: "/projects/ai-song-generator",
-			featured: true,
-			highlight: "Full Stack"
-		},
-	];
+      <div className="page-shell">
+        {/* Full-bleed kinetic hero */}
+        <section className="relative min-h-[100svh] flex flex-col justify-end overflow-hidden">
+          <div className="absolute inset-0 bg-surface">
+            <div className="absolute inset-0 grid-fade opacity-30 md:opacity-60" />
+            <SignalField />
+            {/* Mobile: heavy bottom veil so content stays crisp; desktop keeps side fade */}
+            <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/90 to-surface/40 md:via-surface/50 md:to-transparent" />
+            <div className="absolute inset-0 hidden md:block bg-gradient-to-r from-surface/85 via-surface/35 to-transparent" />
+          </div>
 
-	const achievements = {
-		title: "Award-Winning Developer",
-		items: [
-			{ label: "LSEG Hackathon", value: "1st Place Winner", icon: Award },
-			{ label: "Years Experience", value: "5+", icon: Infinity },
-			{ label: "Projects Delivered", value: "50+", icon: Code },
-			{ label: "Team Leadership", value: "Award-Winning", icon: Star },
-		]
-	};
+          <div className="relative z-10 container-wide px-4 sm:px-6 lg:px-8 pb-14 sm:pb-20 pt-28">
+            <motion.div
+              initial={{ opacity: 1, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55 }}
+              className="max-w-4xl"
+            >
+              <div className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3 py-1.5 mb-7">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+                </span>
+                <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-accent">
+                  {profile.location} · open to AI roles
+                </span>
+              </div>
 
-	const socialLinks = [
-		{
-			name: "GitHub",
-			icon: Github,
-			url: "https://github.com/BLSThathsara20",
-			color: "hover:text-gray-400",
-		},
-		{
-			name: "LinkedIn",
-			icon: Linkedin,
-			url: "https://linkedin.com/in/blsthathsara",
-			color: "hover:text-blue-400",
-		},
-		{
-			name: "LinkTree",
-			icon: ExternalLink,
-			url: "https://linktr.ee/Savinduthathsara",
-			color: "hover:text-green-400",
-		},
-		{
-			name: "Email",
-			icon: Mail,
-			url: "mailto:blsthathsara@gmail.com",
-			color: "hover:text-purple-400",
-		},
-	];
+              <h1 className="display-title mb-5">
+                <span className="block">{profile.firstName}</span>
+                <span className="block text-ink-soft">
+                  Thathsara
+                  <span className="text-accent">_</span>
+                </span>
+              </h1>
 
-	return (
-		<>
-			<SEO
-				title="Savindu Thathsara - Web Developer & DevOps Engineer"
-				description="Experienced Web Developer transitioning to DevOps Engineering. 5+ years building scalable applications with React, Node.js, AWS, Docker, and CI/CD. Award-winning developer with proven track record."
-				keywords={[
-					"Web Developer",
-					"DevOps Engineer",
-					"React Developer",
-					"AWS Engineer",
-					"Docker",
-					"CI/CD",
-					"Full Stack Developer",
-					"Cloud Engineer",
-					"Infrastructure Automation",
-					"Sri Lankan Developer"
-				]}
-			/>
+              <p className="font-display text-2xl sm:text-3xl md:text-4xl font-medium tracking-tight text-ink mb-5 max-w-2xl">
+                {profile.headline}
+              </p>
 
-			<div className="relative min-h-screen">
-				<BackgroundVideo />
+              <p className="body-lg max-w-xl mb-9">
+                {profile.shortBio}
+              </p>
 
-				<div className="relative z-10">
-					{/* Hero Section - First Thing Recruiters See */}
-					<section className="min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-8 pb-40">
-						<div className="max-w-7xl mx-auto w-full">
-							{/* Hero Content */}
-							<motion.div
-								initial={{ opacity: 0, y: 20 }}
-								animate={{ opacity: 1, y: 0 }}
-								className="text-center mb-16"
-							>
-								{/* Status Badge */}
-								<motion.div
-									initial={{ scale: 0.9, opacity: 0 }}
-									animate={{ scale: 1, opacity: 1 }}
-									transition={{ duration: 0.5 }}
-									className="inline-block mb-6"
-								>
-									<div className="relative">
-										<motion.div
-											className="absolute -inset-1 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-green-500 blur-lg opacity-75"
-											animate={{
-												scale: [1, 1.1, 1],
-												opacity: [0.5, 0.8, 0.5],
-											}}
-											transition={{
-												duration: 4,
-												repeat: 9999,
-												repeatType: "loop",
-												ease: "linear",
-												times: [0, 0.5, 1],
-											}}
-										/>
-										<div className="relative bg-black/50 backdrop-blur-sm rounded-full px-4 py-1.5 sm:px-6 sm:px-8 sm:py-2 border border-white/10">
-											<span className="text-xs sm:text-sm md:text-base font-medium text-white/80">
-												5+ Years | Full Stack & Cloud
-											</span>
-										</div>
-									</div>
-								</motion.div>
+              <div className="flex flex-wrap gap-3">
+                <Link to="/projects" className="btn-primary">
+                  Explore work
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+                <a href={profile.links.resume} download className="btn-secondary">
+                  Resume PDF
+                </a>
+              </div>
+            </motion.div>
+          </div>
+        </section>
 
-								{/* Main Title - Humanized & Eye-Catching */}
-								<motion.h1
-									initial={{ opacity: 0, y: 20 }}
-									animate={{ opacity: 1, y: 0 }}
-									transition={{ delay: 0.1, duration: 0.6 }}
-									className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 sm:mb-4 lg:mb-6 leading-tight px-2"
-								>
-									<span className="bg-clip-text text-transparent bg-gradient-to-r 
-									                from-white via-blue-200 to-purple-200">
-										Turning Ideas into
-									</span>
-									<br className="hidden sm:block" />
-									<span className="bg-clip-text text-transparent bg-gradient-to-r 
-									                from-purple-200 via-pink-200 to-blue-200">
-										Reality
-									</span>
-								</motion.h1>
+        <Marquee items={marqueeItems} />
 
-								{/* Subtitle */}
-								<motion.p
-									initial={{ opacity: 0, y: 20 }}
-									animate={{ opacity: 1, y: 0 }}
-									transition={{ delay: 0.15, duration: 0.6 }}
-									className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-text-primary mb-3 sm:mb-4 px-2"
-								>
-									{heroContent.subtitle}
-								</motion.p>
+        {/* Bento work */}
+        <section className="section-pad">
+          <div className="container-wide">
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10 sm:mb-14">
+              <div>
+                <p className="eyebrow mb-3">Selected systems</p>
+                <h2 className="section-title max-w-xl">
+                  Built to remove friction
+                </h2>
+              </div>
+              <Link to="/projects" className="btn-ghost group">
+                All projects
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
 
-								{/* Description */}
-								<motion.p
-									initial={{ opacity: 0, y: 20 }}
-									animate={{ opacity: 1, y: 0 }}
-									transition={{ delay: 0.2, duration: 0.6 }}
-									className="text-sm sm:text-base md:text-lg lg:text-xl text-text-secondary 
-									           max-w-4xl mx-auto mb-6 sm:mb-8 lg:mb-12 leading-relaxed px-4"
-								>
-									{heroContent.description}
-								</motion.p>
+            <div className="grid grid-cols-1 md:grid-cols-6 gap-4 sm:gap-5 auto-rows-[minmax(180px,auto)]">
+              {featuredWork.map((work, i) => {
+                const span =
+                  i === 0
+                    ? 'md:col-span-4 md:row-span-2'
+                    : i === 1
+                      ? 'md:col-span-2'
+                      : i === 2
+                        ? 'md:col-span-2'
+                        : 'md:col-span-3';
 
-								{/* CTA Buttons - Primary Actions */}
-								<motion.div
-									initial={{ opacity: 0, y: 20 }}
-									animate={{ opacity: 1, y: 0 }}
-									transition={{ delay: 0.3, duration: 0.6 }}
-									className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4 lg:gap-6 mb-8 sm:mb-12 px-4"
-								>
-									<Link
-										to={heroContent.cta.primary.link}
-										className="group relative w-full sm:w-auto px-6 py-3 sm:px-8 sm:py-4 lg:px-10 lg:py-5 
-										         bg-gradient-to-r from-blue-500/30 to-purple-500/30 
-										         hover:from-blue-500/40 hover:to-purple-500/40
-										         rounded-xl backdrop-blur-sm border border-blue-500/40 
-										         hover:border-blue-500/50
-										         transition-all duration-300 overflow-hidden
-										         shadow-lg hover:shadow-glow
-										         font-semibold inline-flex items-center justify-center gap-2 text-text-primary text-sm sm:text-base"
-									>
-										<motion.div
-											className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20"
-											initial={{ x: "-100%" }}
-											whileHover={{ x: "100%" }}
-											transition={{ duration: 0.8, ease: "easeInOut" }}
-										/>
-										<heroContent.cta.primary.icon className="w-5 h-5" />
-										<span className="relative">{heroContent.cta.primary.text}</span>
-										<ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-									</Link>
+                return (
+                  <motion.article
+                    key={work.id}
+                    initial={{ opacity: 1, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-40px' }}
+                    transition={{ delay: i * 0.05, duration: 0.4 }}
+                    className={`bento-cell group p-6 sm:p-7 flex flex-col justify-between min-h-[200px] ${span}`}
+                  >
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_30%_20%,rgba(200,245,66,0.12),transparent_55%)]" />
+                    <div className="relative">
+                      <div className="flex items-center justify-between gap-3 mb-4">
+                        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent">
+                          {work.category}
+                        </span>
+                        {work.liveUrl && (
+                          <a
+                            href={work.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-ink-muted hover:text-accent"
+                            aria-label={`Open ${work.title}`}
+                          >
+                            <ArrowUpRight className="w-4 h-4" />
+                          </a>
+                        )}
+                      </div>
+                      <h3
+                        className={`font-display font-semibold tracking-tight text-ink mb-3 ${
+                          i === 0 ? 'text-3xl sm:text-4xl md:text-5xl' : 'text-2xl sm:text-3xl'
+                        }`}
+                      >
+                        {work.title}
+                      </h3>
+                      <p className="body-lg text-sm sm:text-base max-w-xl">
+                        {work.description}
+                      </p>
+                    </div>
+                    <div className="relative mt-6 flex flex-wrap items-center gap-2 justify-between">
+                      <p className="font-mono text-xs text-accent/90">{work.outcome}</p>
+                      <div className="flex flex-wrap gap-1.5">
+                        {work.tech.slice(0, 3).map((t) => (
+                          <span
+                            key={t}
+                            className="rounded-full border border-border px-2 py-0.5 text-[11px] text-ink-muted"
+                          >
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </motion.article>
+                );
+              })}
+            </div>
+          </div>
+        </section>
 
-									<Link
-										to={heroContent.cta.tertiary.link}
-										className="group relative w-full sm:w-auto px-6 py-3 sm:px-8 sm:py-4 lg:px-10 lg:py-5 
-										         bg-gradient-to-r from-yellow-500/20 to-orange-500/20 
-										         hover:from-yellow-500/30 hover:to-orange-500/30
-										         rounded-xl backdrop-blur-sm border border-yellow-500/30 
-										         hover:border-yellow-500/40
-										         transition-all duration-300 overflow-hidden
-										         shadow-lg hover:shadow-glow
-										         font-semibold inline-flex items-center justify-center gap-2 text-text-primary text-sm sm:text-base"
-									>
-										<motion.div
-											className="absolute inset-0 bg-gradient-to-r from-yellow-500/20 to-orange-500/20"
-											initial={{ x: "-100%" }}
-											whileHover={{ x: "100%" }}
-											transition={{ duration: 0.8, ease: "easeInOut" }}
-										/>
-										<heroContent.cta.tertiary.icon className="w-5 h-5" />
-										<span className="relative">{heroContent.cta.tertiary.text}</span>
-										<ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-									</Link>
+        {/* Experience + portrait split */}
+        <section className="section-pad pt-0">
+          <div className="container-wide grid lg:grid-cols-12 gap-5">
+            <div className="lg:col-span-5 bento-cell overflow-hidden min-h-[420px] relative">
+              <img
+                src={profileImage}
+                alt={profile.name}
+                className="absolute inset-0 h-full w-full object-cover object-top"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
+                <p className="eyebrow mb-2">Profile</p>
+                <p className="font-display text-3xl font-semibold tracking-tight">
+                  {profile.yearsExperience} years shipping
+                </p>
+                <p className="body-lg text-sm mt-2 max-w-sm">
+                  From Associate Lead at Enfection to automation at Asahi Motors London.
+                </p>
+              </div>
+            </div>
 
-									<a
-										href={heroContent.cta.secondary.link}
-										download="Savindu_Thathsara_Resume.pdf"
-										target="_blank"
-										rel="noopener noreferrer"
-										className="w-full sm:w-auto px-6 py-3 sm:px-8 sm:py-4 lg:px-10 lg:py-5 
-										           glass-enhanced rounded-xl 
-										           border border-white/10 hover:border-white/20 
-										           transition-all duration-300
-										           font-semibold text-text-primary
-										           hover:shadow-lg inline-flex items-center justify-center gap-2 text-sm sm:text-base"
-									>
-										<heroContent.cta.secondary.icon className="w-5 h-5" />
-										{heroContent.cta.secondary.text}
-									</a>
-								</motion.div>
-							</motion.div>
+            <div className="lg:col-span-7 bento-cell p-6 sm:p-8">
+              <div className="flex items-end justify-between gap-4 mb-8">
+                <div>
+                  <p className="eyebrow mb-2">Experience</p>
+                  <h2 className="font-display text-3xl sm:text-4xl font-semibold tracking-tight">
+                    Recent signal
+                  </h2>
+                </div>
+                <Link to="/about#experience" className="btn-ghost text-xs sm:text-sm">
+                  Full timeline
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
 
-							{/* Core Skills - Second Thing Recruiters Look For */}
-							<motion.div
-								initial={{ opacity: 0, y: 30 }}
-								animate={{ opacity: 1, y: 0 }}
-								transition={{ delay: 0.4, duration: 0.6 }}
-								className="mb-12 sm:mb-16 px-4"
-							>
-								<h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-6 sm:mb-8 text-center text-text-primary">
-									Core Expertise
-								</h2>
-								<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-									{Object.values(coreSkills).map((skill, index) => (
-										<motion.div
-											key={skill.title}
-											initial={{ opacity: 0, y: 30 }}
-											animate={{ opacity: 1, y: 0 }}
-											transition={{
-												delay: 0.5 + index * 0.1,
-												duration: 0.5,
-												ease: [0.4, 0, 0.2, 1]
-											}}
-											className="group relative overflow-hidden rounded-2xl card-hover"
-										>
-											<div
-												className="absolute -inset-[1px] bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-green-500/30 
-								         rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"
-											/>
-											<div className="relative glass-enhanced h-full rounded-2xl p-4 sm:p-6 lg:p-8">
-												<motion.div
-													className="mb-4 sm:mb-5"
-													whileHover={{ scale: 1.1, rotate: 5 }}
-													transition={{ type: "spring", stiffness: 300 }}
-												>
-													<skill.icon className={`w-8 h-8 sm:w-10 sm:h-10 text-${skill.color}-400`} />
-												</motion.div>
+              <div className="space-y-0 divide-y divide-border">
+                {recentRoles.map((role) => (
+                  <div key={role.id} className="py-5 first:pt-0 last:pb-0">
+                    <div className="flex flex-wrap items-center gap-2 mb-1">
+                      <p className="font-mono text-[11px] text-ink-muted uppercase tracking-wider">
+                        {role.period}
+                      </p>
+                      {role.current && (
+                        <span className="rounded-full bg-accent/15 text-accent px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">
+                          Now
+                        </span>
+                      )}
+                    </div>
+                    <h3 className="font-display text-xl sm:text-2xl font-semibold tracking-tight">
+                      {role.role}
+                    </h3>
+                    <p className="font-sans text-sm text-ink-soft mt-1 mb-2">
+                      {role.company} · {role.location}
+                    </p>
+                    <p className="body-lg text-sm max-w-2xl">{role.summary}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
 
-												<h3 className="text-lg sm:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 text-text-primary">
-													{skill.title}
-												</h3>
-												<p className="text-text-secondary mb-4 sm:mb-6 leading-relaxed text-xs sm:text-sm lg:text-base">
-													{skill.description}
-												</p>
+        {/* Capability mosaic */}
+        <section className="section-pad pt-0">
+          <div className="container-wide">
+            <p className="eyebrow mb-3">Stack</p>
+            <h2 className="section-title mb-10 max-w-2xl">
+              AI first.
+              <span className="text-ink-muted"> Then cloud. Then the interface.</span>
+            </h2>
 
-												<div className="flex flex-wrap gap-2">
-													{skill.technologies.map((tech, i) => (
-														<motion.span
-															key={tech}
-															initial={{ opacity: 0, scale: 0.8 }}
-															animate={{ opacity: 1, scale: 1 }}
-															transition={{
-																delay: 0.6 + i * 0.05,
-																type: "spring",
-																stiffness: 200
-															}}
-															whileHover={{ scale: 1.05 }}
-															className="px-3 py-1.5 text-xs lg:text-sm 
-															           bg-white/5 hover:bg-white/10 
-															           rounded-full border border-white/10 
-															           hover:border-white/20 
-															           transition-all duration-200
-															           text-text-secondary"
-														>
-															{tech}
-														</motion.span>
-													))}
-												</div>
-											</div>
-										</motion.div>
-									))}
-								</div>
-							</motion.div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {[
+                { title: 'AI & automation', items: skills.aiAutomation, accent: true },
+                { title: 'Cloud & delivery', items: skills.cloud, accent: true },
+                { title: 'Web systems', items: skills.web, accent: false },
+                { title: 'Platforms', items: skills.platforms, accent: false },
+              ].map((col) => (
+                <div
+                  key={col.title}
+                  className={`bento-cell p-5 sm:p-6 ${col.accent ? 'bg-accent/[0.04]' : ''}`}
+                >
+                  <div className="flex items-center gap-2 mb-4">
+                    {col.accent && <Sparkles className="w-3.5 h-3.5 text-accent" />}
+                    <h3 className="font-mono text-[11px] uppercase tracking-[0.18em] text-accent">
+                      {col.title}
+                    </h3>
+                  </div>
+                  <ul className="space-y-2.5">
+                    {col.items.map((item) => (
+                      <li key={item} className="font-sans text-sm text-ink-soft">
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-							{/* Key Projects - Third Thing: Proof of Work */}
-							<motion.div
-								initial={{ opacity: 0, y: 20 }}
-								animate={{ opacity: 1, y: 0 }}
-								transition={{ delay: 0.8, duration: 0.5 }}
-								className="mb-12 sm:mb-16 px-4"
-							>
-								<h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-6 sm:mb-8 text-center text-text-primary">
-									Featured Projects
-								</h2>
-								<div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
-									{keyProjects.map((project, index) => (
-										<Link
-											key={project.title}
-											to={project.link}
-											className="group relative glass-enhanced rounded-2xl p-4 sm:p-6 lg:p-8 
-											         border border-white/10 hover:border-white/20 
-											         transition-all duration-300 overflow-hidden
-											         card-hover"
-										>
-											{project.featured && (
-												<motion.div
-													initial={{ scale: 0, rotate: -180 }}
-													animate={{ scale: 1, rotate: 0 }}
-													transition={{ delay: 0.9 + index * 0.1, type: "spring" }}
-													className="absolute top-4 right-4 px-3 py-1.5 
-													           bg-gradient-to-r from-blue-500/20 to-purple-500/20 
-													           rounded-full text-xs lg:text-sm 
-													           border border-blue-500/30 
-													           backdrop-blur-sm flex items-center gap-2
-													           shadow-glow"
-												>
-													<Star className="w-3 h-3 text-blue-400" />
-													<span className="font-medium">{project.highlight}</span>
-												</motion.div>
-											)}
+        {/* Education + awards as signal strip */}
+        <section className="section-pad pt-0">
+          <div className="container-wide grid lg:grid-cols-2 gap-4">
+            <div className="bento-cell p-6 sm:p-8 bg-surface-light text-ink-dark">
+              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-accent-dim mb-3">
+                Education
+              </p>
+              <h2 className="font-display text-3xl sm:text-4xl font-semibold tracking-tight mb-8 text-ink-dark">
+                Learning AI in London
+              </h2>
+              <div className="space-y-5">
+                {education.map((ed) => (
+                  <div key={ed.id} className="border-l-2 border-accent pl-4">
+                    <p className="font-mono text-[11px] text-ink-dark/50">{ed.period}</p>
+                    <h3 className="font-display text-lg font-semibold mt-1 text-ink-dark">
+                      {ed.title}
+                    </h3>
+                    <p className="font-sans text-sm text-ink-dark/60 mt-1">
+                      {ed.school}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
 
-											<h3 className="text-lg sm:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 
-											          group-hover:text-blue-400 
-											          transition-colors duration-300 pr-16 sm:pr-24
-											          text-text-primary">
-												{project.title}
-											</h3>
-											<p className="text-text-secondary mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
-												{project.description}
-											</p>
+            <div className="bento-cell p-6 sm:p-8">
+              <p className="eyebrow mb-3">Recognition</p>
+              <h2 className="font-display text-3xl sm:text-4xl font-semibold tracking-tight mb-8">
+                Awards that stuck
+              </h2>
+              <div className="space-y-5">
+                {awards.map((award) => (
+                  <div key={award.id} className="flex gap-4 items-start">
+                    <span className="font-mono text-accent text-sm shrink-0">{award.year}</span>
+                    <div>
+                      <h3 className="font-display text-lg font-semibold">{award.title}</h3>
+                      <p className="font-sans text-sm text-ink-soft mt-1">{award.org}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
 
-											<div className="flex flex-wrap gap-2 mb-4">
-												{project.tech.map((tech) => (
-													<motion.span
-														key={tech}
-														whileHover={{ scale: 1.05 }}
-														className="px-3 py-1.5 text-xs lg:text-sm 
-														           bg-white/5 hover:bg-white/10 
-														           rounded-full border border-white/10 
-														           hover:border-white/20
-														           transition-all duration-200
-														           text-text-secondary"
-													>
-														{tech}
-													</motion.span>
-												))}
-											</div>
-
-											<motion.div
-												className="absolute inset-0 bg-gradient-to-br 
-												         from-blue-500/5 via-purple-500/5 to-green-500/5 
-												         opacity-0 group-hover:opacity-100 
-												         transition-opacity duration-500"
-												initial={false}
-											/>
-
-											<motion.div
-												className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 
-												         transition-opacity duration-300"
-												initial={false}
-											>
-												<ArrowRight className="w-5 h-5 text-blue-400" />
-											</motion.div>
-										</Link>
-									))}
-								</div>
-							</motion.div>
-
-							{/* Achievements - Fourth: Credibility */}
-							<motion.div
-								initial={{ opacity: 0, y: 20 }}
-								animate={{ opacity: 1, y: 0 }}
-								transition={{ delay: 1.0, duration: 0.5 }}
-								className="mb-8 sm:mb-12 px-4"
-							>
-								<div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
-									{achievements.items.map((item, index) => (
-										<motion.div
-											key={item.label}
-											initial={{ opacity: 0, scale: 0.8 }}
-											animate={{ opacity: 1, scale: 1 }}
-											transition={{ delay: 1.1 + index * 0.1 }}
-											className="glass-enhanced rounded-xl p-4 sm:p-6 text-center border border-white/10
-											         hover:border-white/20 transition-all duration-300"
-										>
-											<item.icon className="w-6 h-6 sm:w-8 sm:h-8 mx-auto mb-2 sm:mb-3 text-blue-400" />
-											<div className="text-xl sm:text-2xl lg:text-3xl font-bold text-text-primary mb-1">
-												{item.value}
-											</div>
-											<div className="text-xs sm:text-sm text-text-secondary">{item.label}</div>
-										</motion.div>
-									))}
-								</div>
-							</motion.div>
-
-							{/* Social Links - Fifth: Contact */}
-							<motion.div
-								initial={{ opacity: 0, y: 20 }}
-								animate={{ opacity: 1, y: 0 }}
-								transition={{ delay: 1.2 }}
-								className="flex justify-center gap-4 sm:gap-6 px-4"
-							>
-								{socialLinks.map((link) => (
-									<motion.a
-										key={link.name}
-										href={link.url}
-										target="_blank"
-										rel="noopener noreferrer"
-										className={`p-2.5 sm:p-3 rounded-xl glass-enhanced border border-white/10 
-										           transition-all duration-300 ${link.color}
-										           hover:border-white/20`}
-										whileHover={{
-											scale: 1.1,
-											backgroundColor: "rgba(255, 255, 255, 0.1)",
-										}}
-										whileTap={{ scale: 0.95 }}
-										aria-label={link.name}
-									>
-										<link.icon className="w-4 h-4 sm:w-5 sm:h-5" />
-										<span className="sr-only">{link.name}</span>
-									</motion.a>
-								))}
-							</motion.div>
-						</div>
-					</section>
-				</div>
-			</div>
-		</>
-	);
+        {/* CTA band */}
+        <section className="section-pad pt-0 pb-24">
+          <div className="container-wide">
+            <div className="relative overflow-hidden rounded-[2rem] border border-accent/25 bg-accent/[0.07] px-6 py-14 sm:px-12 sm:py-20 text-center">
+              <div className="absolute inset-0 grid-fade opacity-40" />
+              <div className="relative">
+                <p className="eyebrow mb-4">{profile.availability}</p>
+                <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight mb-5">
+                  Let’s automate the boring.
+                  <br />
+                  <span className="text-accent">Keep the craft.</span>
+                </h2>
+                <p className="body-lg max-w-xl mx-auto mb-9">
+                  Open to AI automation, workflow engineering, and product roles that
+                  need someone who designs and ships.
+                </p>
+                <div className="flex flex-wrap justify-center gap-3">
+                  <Link to="/contact" className="btn-primary">
+                    Start a conversation
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                  <a
+                    href={profile.links.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-secondary"
+                  >
+                    LinkedIn
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </>
+  );
 };
 
 export default HomePage;

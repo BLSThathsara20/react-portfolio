@@ -5,6 +5,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { WelcomeProvider } from './contexts/WelcomeContext';
 import router from './routes';
 import './styles/main.scss';
+import './index.css';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
