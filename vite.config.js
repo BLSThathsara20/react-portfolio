@@ -74,9 +74,16 @@ export default defineConfig({
 					if (!id.includes("node_modules")) return;
 					if (id.includes("framer-motion")) return "animations";
 					if (id.includes("lucide-react")) return "icons";
-					if (id.includes("react-helmet")) return "helmet";
-					if (id.includes("react-router")) return "router";
-					if (id.includes("react-dom") || id.includes("/react/")) return "vendor";
+					// Keep React ecosystem in one chunk — splitting helmet/router
+					// caused TDZ: "Cannot access 'T' before initialization"
+					if (
+						id.includes("react-dom") ||
+						id.includes("react-router") ||
+						id.includes("react-helmet") ||
+						id.includes("/react/")
+					) {
+						return "vendor";
+					}
 				},
 				chunkFileNames: "assets/js/[name]-[hash].js",
 				entryFileNames: "assets/js/[name]-[hash].js",
