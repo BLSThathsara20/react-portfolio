@@ -273,8 +273,8 @@
   </head>
   <body>
     <div id="root">
-      <!-- Static LCP shell — replaced by React on boot; eliminates empty-root render delay -->
-      <div class="boot-shell" data-boot-shell>
+      <!-- Static LCP shell — includes <main> so landmarks exist before JS hydrates -->
+      <main id="main-content" class="boot-shell" data-boot-shell>
         <div class="boot-shell__inner">
           <p class="boot-shell__label">London, United Kingdom · open to AI roles</p>
           <h1>
@@ -299,7 +299,7 @@
             >
           </div>
         </div>
-      </div>
+      </main>
     </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

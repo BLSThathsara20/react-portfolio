@@ -21,7 +21,7 @@ const AppLayout = () => {
   return (
     <SpotlightProvider>
       <SiteHeader />
-      <main className="min-h-[70vh] pt-4">
+      <main id="main-content" className="min-h-[70vh] pt-4">
         <PageTransition>
           <Outlet />
         </PageTransition>
