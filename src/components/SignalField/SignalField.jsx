@@ -74,10 +74,10 @@ const SignalField = () => {
       };
     });
 
-    const satellites = Array.from({ length: 28 }, (_, i) => ({
-      x: i < 8 ? Math.random() * 0.4 : 0.35 + Math.random() * 0.6,
+    const satellites = Array.from({ length: 16 }, (_, i) => ({
+      x: i < 5 ? Math.random() * 0.4 : 0.35 + Math.random() * 0.6,
       y: Math.random(),
-      r: 0.8 + Math.random() * 1.6,
+      r: 0.8 + Math.random() * 1.4,
       phase: Math.random() * Math.PI * 2,
       speed: 0.15 + Math.random() * 0.4,
     }));
@@ -123,11 +123,16 @@ const SignalField = () => {
       }
     }
 
+    let visible = true;
+    let lastFrame = 0;
+
     const resize = () => {
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const mobile = canvas.clientWidth < MOBILE_BP;
+      // Cap DPR hard — canvas pixels dominate main-thread + GPU cost
+      dpr = Math.min(window.devicePixelRatio || 1, mobile ? 1.25 : 1.5);
       width = canvas.clientWidth;
       height = canvas.clientHeight;
-      isMobile.current = width < MOBILE_BP;
+      isMobile.current = mobile;
       canvas.width = Math.floor(width * dpr);
       canvas.height = Math.floor(height * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -570,7 +575,20 @@ const SignalField = () => {
     };
 
     const draw = (now) => {
+      if (!visible) {
+        rafRef.current = 0;
+        return;
+      }
+
       const mobile = isMobile.current;
+      // Target ~30fps on mobile / reduced motion after boot to save battery
+      const minDelta = mobile || reducedMotion.current ? 32 : 16;
+      if (now - lastFrame < minDelta && !reducedMotion.current) {
+        rafRef.current = requestAnimationFrame(draw);
+        return;
+      }
+      lastFrame = now;
+
       const boot = getBoot(now, mobile);
       ctx.clearRect(0, 0, width, height);
 
@@ -580,16 +598,41 @@ const SignalField = () => {
         drawDesktop(now, boot);
       }
 
+      // Freeze after boot when user prefers reduced motion
+      if (reducedMotion.current && boot.progress >= 1) {
+        rafRef.current = 0;
+        return;
+      }
+
       rafRef.current = requestAnimationFrame(draw);
     };
 
+    const startLoop = () => {
+      if (!rafRef.current) rafRef.current = requestAnimationFrame(draw);
+    };
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        visible = entry.isIntersecting;
+        if (visible) startLoop();
+        else {
+          cancelAnimationFrame(rafRef.current);
+          rafRef.current = 0;
+        }
+      },
+      { threshold: 0.05 }
+    );
+    io.observe(canvas);
+
     resize();
-    window.addEventListener('resize', resize);
+    window.addEventListener('resize', resize, { passive: true });
     window.addEventListener('pointermove', onMove, { passive: true });
-    rafRef.current = requestAnimationFrame(draw);
+    startLoop();
 
     return () => {
       cancelAnimationFrame(rafRef.current);
+      rafRef.current = 0;
+      io.disconnect();
       window.removeEventListener('resize', resize);
       window.removeEventListener('pointermove', onMove);
     };

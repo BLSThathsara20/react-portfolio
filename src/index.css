@@ -45,12 +45,35 @@ a, button, input, textarea, select {
 }
 
 @layer components {
+  .page-enter {
+    animation: pageEnter 0.35s ease-out both;
+  }
+
+  @keyframes pageEnter {
+    from {
+      opacity: 0.92;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .page-enter {
+      animation: none;
+    }
+  }
+
   .page-shell {
     @apply relative min-h-screen bg-surface text-ink overflow-x-hidden;
   }
 
   .section-pad {
     @apply px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-28;
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 720px;
   }
 
   .container-narrow {

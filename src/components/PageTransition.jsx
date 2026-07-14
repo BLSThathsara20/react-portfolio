@@ -1,19 +1,14 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
 
+/** CSS-only page enter — keeps Framer off the critical path */
 const PageTransition = ({ children }) => {
   const location = useLocation();
 
   return (
-    <motion.div
-      key={location.pathname}
-      initial={{ opacity: 0.96, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.35, ease: 'easeOut' }}
-    >
+    <div key={location.pathname} className="page-enter">
       {children}
-    </motion.div>
+    </div>
   );
 };
 

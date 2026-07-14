@@ -7,11 +7,23 @@
   to = "/index.html"
   status = 200
 
+# Immutable hashed assets — max cache
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
 [[headers]]
   for = "/og-image.png"
   [headers.values]
     Cache-Control = "public, max-age=604800"
     Content-Type = "image/png"
+
+[[headers]]
+  for = "/og-image.webp"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+    Content-Type = "image/webp"
 
 [[headers]]
   for = "/llms.txt"
@@ -35,9 +47,4 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     X-Frame-Options = "SAMEORIGIN"
-
-
-
-
-
-
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"

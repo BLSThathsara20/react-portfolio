@@ -2,10 +2,9 @@ import { createBrowserRouter } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import AppLayout from './layouts/AppLayout';
 import ErrorBoundary from './components/ErrorBoundary';
-import { SkeletonCard } from './components/Skeleton';
+import HomePage from './pages/HomePage';
 
-// Lazy load pages for better performance
-const HomePage = lazy(() => import('./pages/HomePage'));
+// Non-critical routes stay lazy to keep first paint tiny
 const AboutPage = lazy(() => import('./pages/AboutPage'));
 const ProjectsPage = lazy(() => import('./pages/ProjectsPage'));
 const PlaygroundPage = lazy(() => import('./pages/PlaygroundPage'));
@@ -16,17 +15,14 @@ const ContactPage = lazy(() => import('./pages/ContactPage'));
 const ResumePage = lazy(() => import('./pages/ResumePage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
-// Loading fallback component
 const PageLoader = () => (
-  <div className="min-h-screen flex items-center justify-center p-4">
-    <div className="max-w-7xl mx-auto w-full">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {[1, 2, 3].map((i) => (
-          <SkeletonCard key={i} />
-        ))}
-      </div>
-    </div>
+  <div className="min-h-[40vh] flex items-center justify-center" aria-hidden>
+    <div className="h-8 w-8 rounded-full border-2 border-accent/30 border-t-accent animate-spin" />
   </div>
+);
+
+const Lazy = ({ children }) => (
+  <Suspense fallback={<PageLoader />}>{children}</Suspense>
 );
 
 const router = createBrowserRouter([
@@ -35,88 +31,81 @@ const router = createBrowserRouter([
     element: <AppLayout />,
     errorElement: <ErrorBoundary />,
     children: [
-      {
-        index: true,
-        element: (
-          <Suspense fallback={<PageLoader />}>
-            <HomePage />
-          </Suspense>
-        )
-      },
+      { index: true, element: <HomePage /> },
       {
         path: 'about',
         element: (
-          <Suspense fallback={<PageLoader />}>
+          <Lazy>
             <AboutPage />
-          </Suspense>
-        )
+          </Lazy>
+        ),
       },
       {
         path: 'projects',
         element: (
-          <Suspense fallback={<PageLoader />}>
+          <Lazy>
             <ProjectsPage />
-          </Suspense>
-        )
+          </Lazy>
+        ),
       },
       {
         path: 'playground',
         element: (
-          <Suspense fallback={<PageLoader />}>
+          <Lazy>
             <PlaygroundPage />
-          </Suspense>
-        )
+          </Lazy>
+        ),
       },
       {
         path: 'blog',
         element: (
-          <Suspense fallback={<PageLoader />}>
+          <Lazy>
             <BlogPage />
-          </Suspense>
-        )
+          </Lazy>
+        ),
       },
       {
         path: 'blog/:slug',
         element: (
-          <Suspense fallback={<PageLoader />}>
+          <Lazy>
             <SingleBlogPage />
-          </Suspense>
-        )
+          </Lazy>
+        ),
       },
       {
         path: 'activities',
         element: (
-          <Suspense fallback={<PageLoader />}>
+          <Lazy>
             <ActivitiesPage />
-          </Suspense>
-        )
+          </Lazy>
+        ),
       },
       {
         path: 'contact',
         element: (
-          <Suspense fallback={<PageLoader />}>
+          <Lazy>
             <ContactPage />
-          </Suspense>
-        )
+          </Lazy>
+        ),
       },
       {
         path: 'resume',
         element: (
-          <Suspense fallback={<PageLoader />}>
+          <Lazy>
             <ResumePage />
-          </Suspense>
-        )
+          </Lazy>
+        ),
       },
       {
         path: '*',
         element: (
-          <Suspense fallback={<PageLoader />}>
+          <Lazy>
             <NotFoundPage />
-          </Suspense>
-        )
-      }
-    ]
-  }
+          </Lazy>
+        ),
+      },
+    ],
+  },
 ]);
 
 export default router;

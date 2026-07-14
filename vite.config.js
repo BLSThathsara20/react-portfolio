@@ -2,16 +2,12 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 import path from "path";
-import sass from "sass";
 
 export default defineConfig({
-	// base: '/',
 	plugins: [
 		react(),
 		ViteImageOptimizer({
 			test: /\.(jpe?g|png|gif|tiff|webp|svg|avif)$/i,
-			exclude: undefined,
-			include: undefined,
 			includePublic: true,
 			logStats: true,
 			ansiColors: true,
@@ -23,75 +19,64 @@ export default defineConfig({
 						params: {
 							overrides: {
 								removeViewBox: false,
-								removeTitle: false,
+								cleanupIds: false,
 							},
 						},
 					},
 				],
 			},
-			png: {
-				quality: 85,
-			},
-			jpeg: {
-				quality: 85,
-			},
-			jpg: {
-				quality: 85,
-			},
-			webp: {
-				quality: 85,
-			},
+			png: { quality: 80 },
+			jpeg: { quality: 80 },
+			jpg: { quality: 80 },
+			webp: { quality: 78 },
 		}),
 	],
-	css: {
-		preprocessorOptions: {
-			scss: {
-				additionalData: `@use "src/styles/variables" as *;`,
-				includePaths: [path.resolve(__dirname, "src/styles")],
-			},
-		},
-		devSourcemap: true,
-	},
 	build: {
 		outDir: "dist",
 		assetsDir: "assets",
 		emptyOutDir: true,
-		sourcemap: true,
-		minify: "terser",
-		terserOptions: {
-			format: {
-				comments: false,
-			},
-			compress: {
-				drop_console: true,
-				drop_debugger: true,
-			},
+		sourcemap: false,
+		target: "es2020",
+		minify: "esbuild",
+		cssCodeSplit: true,
+		cssMinify: true,
+		modulePreload: {
+			polyfill: false,
 		},
+		reportCompressedSize: true,
+		chunkSizeWarningLimit: 600,
 		rollupOptions: {
 			output: {
-				manualChunks: {
-					vendor: ["react", "react-dom", "react-router-dom"],
-					animations: ["framer-motion"],
-					icons: ["lucide-react"],
+				manualChunks(id) {
+					if (id.includes("node_modules")) {
+						if (id.includes("framer-motion")) return "animations";
+						if (id.includes("lucide-react")) return "icons";
+						if (
+							id.includes("react-dom") ||
+							id.includes("react-router") ||
+							id.includes("/react/")
+						) {
+							return "vendor";
+						}
+					}
 				},
 				chunkFileNames: "assets/js/[name]-[hash].js",
 				entryFileNames: "assets/js/[name]-[hash].js",
 				assetFileNames: ({ name }) => {
-					if (/\.(gif|jpe?g|png|svg)$/.test(name ?? "")) {
+					if (/\.(gif|jpe?g|png|svg|webp|avif)$/.test(name ?? "")) {
 						return "assets/images/[name]-[hash][extname]";
 					}
 					if (/\.css$/.test(name ?? "")) {
 						return "assets/css/[name]-[hash][extname]";
 					}
-					if (/\.(woff2?|eot|ttf|otf)$/.test(name ?? "")) {
-						return "assets/fonts/[name]-[hash][extname]";
-					}
 					return "assets/[name]-[hash][extname]";
 				},
 			},
 		},
-		cssCodeSplit: true,
-		cssMinify: "@parcel/css",
+	},
+	esbuild: {
+		drop: ["console", "debugger"],
+		legalComments: "none",
 	},
 	server: {
 		port: 3000,

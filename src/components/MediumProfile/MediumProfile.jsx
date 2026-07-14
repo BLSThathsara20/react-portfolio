@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Users } from 'lucide-react';
 import profileImage from '../../assets/savindu-thathsara.webp';
 
+
 const MediumProfile = () => {
   const [followers, setFollowers] = useState(null);
   const MEDIUM_USERNAME = 'blsthathsara';

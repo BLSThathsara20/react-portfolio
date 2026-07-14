@@ -33,6 +33,10 @@ const AboutPage = () => {
               <img
                 src={profileImage}
                 alt={profile.name}
+                width={900}
+                height={1125}
+                fetchPriority="high"
+                decoding="async"
                 className="absolute inset-0 w-full h-full object-cover object-top"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent" />

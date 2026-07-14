@@ -1,11 +1,9 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { lazy, Suspense } from 'react';
 import { ArrowRight, ArrowUpRight, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
-import SignalField from '../components/SignalField';
 import Marquee from '../components/Marquee';
-import profileImage from '../assets/savindu-experience.png';
+import profileImage from '../assets/savindu-experience.webp';
 import {
   profile,
   skills,
@@ -14,6 +12,8 @@ import {
   awards,
   featuredWork,
 } from '../data/profile';
+
+const SignalField = lazy(() => import('../components/SignalField'));
 
 const HomePage = () => {
   const recentRoles = experience.slice(0, 3);
@@ -42,19 +42,16 @@ const HomePage = () => {
         <section className="relative min-h-[100svh] flex flex-col justify-end overflow-hidden">
           <div className="absolute inset-0 bg-surface">
             <div className="absolute inset-0 grid-fade opacity-30 md:opacity-60" />
-            <SignalField />
+            <Suspense fallback={null}>
+              <SignalField />
+            </Suspense>
             {/* Mobile: heavy bottom veil so content stays crisp; desktop keeps side fade */}
             <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/90 to-surface/40 md:via-surface/50 md:to-transparent" />
             <div className="absolute inset-0 hidden md:block bg-gradient-to-r from-surface/85 via-surface/35 to-transparent" />
           </div>
 
           <div className="relative z-10 container-wide px-4 sm:px-6 lg:px-8 pb-14 sm:pb-20 pt-28">
-            <motion.div
-              initial={{ opacity: 1, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55 }}
-              className="max-w-4xl"
-            >
+            <div className="max-w-4xl page-enter">
               <div className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3 py-1.5 mb-7">
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
@@ -90,7 +87,7 @@ const HomePage = () => {
                   Resume PDF
                 </a>
               </div>
-            </motion.div>
+            </div>
           </div>
         </section>
 
@@ -124,12 +121,8 @@ const HomePage = () => {
                         : 'md:col-span-3';
 
                 return (
-                  <motion.article
+                  <article
                     key={work.id}
-                    initial={{ opacity: 1, y: 16 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-40px' }}
-                    transition={{ delay: i * 0.05, duration: 0.4 }}
                     className={`bento-cell group p-6 sm:p-7 flex flex-col justify-between min-h-[200px] ${span}`}
                   >
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_30%_20%,rgba(200,245,66,0.12),transparent_55%)]" />
@@ -174,7 +167,7 @@ const HomePage = () => {
                         ))}
                       </div>
                     </div>
-                  </motion.article>
+                  </article>
                 );
               })}
             </div>
@@ -188,6 +181,10 @@ const HomePage = () => {
               <img
                 src={profileImage}
                 alt={profile.name}
+                width={1200}
+                height={1500}
+                loading="lazy"
+                decoding="async"
                 className="absolute inset-0 h-full w-full object-cover object-top"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent" />
