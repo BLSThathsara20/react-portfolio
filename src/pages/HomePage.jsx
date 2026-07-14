@@ -283,7 +283,7 @@ const HomePage = () => {
         <section className="section-pad pt-0">
           <div className="container-wide grid lg:grid-cols-2 gap-4">
             <div className="bento-cell p-6 sm:p-8 bg-surface-light text-ink-dark">
-              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-accent-dim mb-3">
+              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#4a6410] mb-3">
                 Education
               </p>
               <h2 className="font-display text-3xl sm:text-4xl font-semibold tracking-tight mb-8 text-ink-dark">
@@ -292,11 +292,11 @@ const HomePage = () => {
               <div className="space-y-5">
                 {education.map((ed) => (
                   <div key={ed.id} className="border-l-2 border-accent pl-4">
-                    <p className="font-mono text-[11px] text-ink-dark/50">{ed.period}</p>
+                    <p className="font-mono text-[11px] text-ink-dark/80">{ed.period}</p>
                     <h3 className="font-display text-lg font-semibold mt-1 text-ink-dark">
                       {ed.title}
                     </h3>
-                    <p className="font-sans text-sm text-ink-dark/60 mt-1">
+                    <p className="font-sans text-sm text-ink-dark/75 mt-1">
                       {ed.school}
                     </p>
                   </div>
