@@ -14,6 +14,10 @@ import emailjs from '@emailjs/browser';
 import SEO from '../components/SEO';
 import { profile } from '../data/profile';
 
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_pdj6b5w';
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_fv0heep';
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'hLt3-AGSDqAix159e';
+
 const ContactPage = () => {
   const [formState, setFormState] = useState({
     name: '',
@@ -24,6 +28,7 @@ const ContactPage = () => {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
+  const [submitError, setSubmitError] = useState('');
   const [focusedField, setFocusedField] = useState(null);
 
   const contactMethods = [
@@ -78,32 +83,55 @@ const ContactPage = () => {
     e.preventDefault();
     if (!validateForm()) {
       setSubmitStatus('error');
+      setSubmitError('Please fix the highlighted fields.');
       setTimeout(() => setSubmitStatus(null), 3000);
       return;
     }
     setIsSubmitting(true);
     setSubmitStatus(null);
+    setSubmitError('');
+
+    const templateParams = {
+      name: formState.name,
+      email: formState.email,
+      from_name: formState.name,
+      from_email: formState.email,
+      reply_to: formState.email,
+      subject: formState.subject,
+      message: formState.message,
+      to_email: profile.email,
+    };
+
     try {
       await emailjs.send(
-        'service_pdj6b5w',
-        'template_fv0heep',
-        {
-          from_name: formState.name,
-          from_email: formState.email,
-          subject: formState.subject,
-          message: formState.message,
-          to_email: profile.email,
-        },
-        'hLt3-AGSDqAix159e'
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams,
+        { publicKey: EMAILJS_PUBLIC_KEY }
       );
       setSubmitStatus('success');
       setFormState({ name: '', email: '', subject: '', message: '' });
     } catch (error) {
+      const status = error?.status || error?.text || '';
       console.error('Email sending failed:', error);
+      // Fallback: open native mail client so contact never fully blocks
+      const mailto = `mailto:${profile.email}?subject=${encodeURIComponent(
+        formState.subject
+      )}&body=${encodeURIComponent(
+        `${formState.message}\n\n— ${formState.name} (${formState.email})`
+      )}`;
       setSubmitStatus('error');
+      setSubmitError(
+        status === 412 || String(status).includes('412')
+          ? 'Email service blocked this origin. Opening your mail app instead…'
+          : 'Couldn’t reach the email service. Opening your mail app instead…'
+      );
+      window.setTimeout(() => {
+        window.location.href = mailto;
+      }, 600);
     } finally {
       setIsSubmitting(false);
-      setTimeout(() => setSubmitStatus(null), 5000);
+      setTimeout(() => setSubmitStatus(null), 6000);
     }
   };
 
@@ -257,7 +285,9 @@ const ContactPage = () => {
                   <AlertCircle className="w-5 h-5 text-red-500 shrink-0" />
                   <div>
                     <p className="font-sans font-medium text-ink">Couldn’t send</p>
-                    <p className="font-sans text-sm text-ink-soft">Please try again shortly.</p>
+                    <p className="font-sans text-sm text-ink-soft">
+                      {submitError || 'Please try again shortly.'}
+                    </p>
                   </div>
                 </>
               )}

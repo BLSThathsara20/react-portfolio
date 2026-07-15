@@ -35,7 +35,7 @@ const AboutPage = () => {
                 alt={profile.name}
                 width={900}
                 height={1125}
-                fetchPriority="high"
+                fetchpriority="high"
                 decoding="async"
                 className="absolute inset-0 w-full h-full object-cover object-top"
               />
