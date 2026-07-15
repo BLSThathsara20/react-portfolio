@@ -36,13 +36,13 @@ const HomePage = () => {
     <>
       <SEO
         title="AI & Automation Engineer"
-        description={`${profile.shortBio} ${profile.availability}.`}
+        description={profile.shortBio}
         keywords={[
           'AI Automation Engineer London',
           'Process Automation',
           'AWS Automation',
+          'FarmSense AI',
           'Northumbria University AI',
-          'hire AI engineer UK',
         ]}
       />
 
@@ -67,7 +67,7 @@ const HomePage = () => {
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
                 </span>
                 <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-accent">
-                  {profile.location} · open to AI roles
+                  {profile.location}
                 </span>
               </div>
 
@@ -393,15 +393,15 @@ const HomePage = () => {
             <div className="relative overflow-hidden rounded-[2rem] border border-accent/25 bg-accent/[0.07] px-6 py-14 sm:px-12 sm:py-20 text-center">
               <div className="absolute inset-0 grid-fade opacity-40" />
               <div className="relative">
-                <p className="eyebrow mb-4">{profile.availability}</p>
+                <p className="eyebrow mb-4">{profile.tagline}</p>
                 <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight mb-5">
                   Let’s automate the boring.
                   <br />
                   <span className="text-accent">Keep the craft.</span>
                 </h2>
                 <p className="body-lg max-w-xl mx-auto mb-9">
-                  Open to AI automation, workflow engineering, and product roles that
-                  need someone who designs and ships.
+                  Exploring AI automation, workflow systems, and interfaces —
+                  happy to talk about projects or collaboration.
                 </p>
                 <div className="flex flex-wrap justify-center gap-3">
                   <Link to="/contact" className="btn-primary">

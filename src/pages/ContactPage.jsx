@@ -161,8 +161,8 @@ const ContactPage = () => {
                 Let’s talk
               </h1>
               <p className="body-lg mb-10 max-w-md">
-                Open to AI & automation roles, workflow engineering, and projects that
-                blend delivery with intelligent systems. {profile.location}.
+                Questions about a project, collaboration, or something I built —
+                drop a message. {profile.location}.
               </p>
 
               <div className="grid sm:grid-cols-2 gap-3">

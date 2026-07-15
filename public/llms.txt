@@ -2,7 +2,7 @@
 
 > AI & Automation Engineer in London. Building AI-aware automation and reliable web systems with AWS, workflow automation, React, and OpenAI. Studying BSc (Hons) Computing with Artificial Intelligence at Northumbria University, London.
 
-Over 7 years in web systems and cloud infrastructure. Currently leading IT operations and automation at Asahi Motors London — Make.com lead tracking, React + Supabase staff platform, and Autotrader + OpenAI lead replies. Open to AI automation, MLOps, and applied AI roles in the UK (on-site, hybrid, or remote).
+Over 7 years in web systems and cloud infrastructure. Currently leading IT operations and automation at Asahi Motors London — Make.com lead tracking, React + Supabase staff platform, and Autotrader + OpenAI lead replies. Portfolio of selected systems, experiments, and shipped work.
 
 ## Pages
 
@@ -10,7 +10,7 @@ Over 7 years in web systems and cloud infrastructure. Currently leading IT opera
 - [About](https://savithathsara.me/about): Background, experience, and education
 - [Work](https://savithathsara.me/projects): Featured projects and case studies
 - [Resume](https://savithathsara.me/resume): Resume overview
-- [Contact](https://savithathsara.me/contact): Hiring and collaboration contact form
+- [Contact](https://savithathsara.me/contact): Get in touch
 - [Activities](https://savithathsara.me/activities): Awards and recognition
 - [CV PDF](https://savithathsara.me/cv.pdf): Downloadable CV
 - [Sitemap](https://savithathsara.me/sitemap.xml): Crawlable site map

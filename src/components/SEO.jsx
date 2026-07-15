@@ -106,10 +106,6 @@ const SEO = ({
       '@type': 'Organization',
       name: 'Asahi Motors London',
     },
-    seeks: {
-      '@type': 'Demand',
-      name: 'AI and automation engineering roles in the United Kingdom',
-    },
   };
 
   const websiteLd = {
