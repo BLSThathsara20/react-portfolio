@@ -108,11 +108,11 @@ const AboutPage = () => {
               {[
                 {
                   title: 'Practical automation',
-                  body: 'I remove repetitive work with workflows, web tools, and integrations — proven at Asahi Motors London.',
+                  body: 'Make.com workflows, React + Supabase ops tools, and AI-assisted lead handling — shipping real systems at Asahi Motors London.',
                 },
                 {
                   title: 'AI-aware engineering',
-                  body: 'Studying Computing with AI while applying literacy, tooling, and automation thinking to real operations.',
+                  body: 'Studying Computing with AI while applying automation, Python, and OpenAI integrations to day-to-day business problems.',
                 },
                 {
                   title: 'Interface craft',
@@ -192,6 +192,9 @@ const AboutPage = () => {
                     <p className="font-sans text-sm text-ink-soft mt-1">
                       {ed.school} · {ed.location}
                     </p>
+                    {ed.note && (
+                      <p className="font-mono text-[11px] text-ink-muted mt-1">{ed.note}</p>
+                    )}
                   </div>
                 ))}
               </div>

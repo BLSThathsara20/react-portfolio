@@ -18,8 +18,8 @@ const ProjectsPage = () => {
     <>
       <SEO
         title="Work"
-        description="Selected automation and web delivery projects by Savindu Thathsara — dealership workflows, NGO platforms, brand sites, and e-commerce."
-        keywords={['Projects', 'Automation', 'Web development', 'UI UX', 'Portfolio']}
+        description="Selected automation and web projects by Savindu Thathsara — dealership ops tools, Make.com workflows, NGO platforms, and e-commerce."
+        keywords={['Projects', 'Automation', 'Make.com', 'Supabase', 'Web development', 'Portfolio']}
       />
 
       <div className="page-shell">
@@ -30,8 +30,9 @@ const ProjectsPage = () => {
               Selected systems
             </h1>
             <p className="body-lg">
-              Automation wins and shipped interfaces — from operational tooling at Asahi
-              Motors London to brand platforms delivered at scale.
+              Automation wins and shipped interfaces — from Make.com workflows and
+              React + Supabase ops tools at Asahi Motors London to brand platforms
+              delivered at scale.
             </p>
           </div>
         </section>

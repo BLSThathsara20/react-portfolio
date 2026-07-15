@@ -1,15 +1,17 @@
 export const profile = {
   name: 'Savindu Thathsara',
   firstName: 'Savindu',
+  title: 'AI & Automation Engineer',
   location: 'London, United Kingdom',
   headline: 'Building AI-aware automation & reliable web systems',
   shortBio:
-    'Engineer focused on practical automation, AWS workflows, and modern web systems — currently studying Computing with AI in London.',
+    'AI & Automation Engineer in London — AWS, workflow automation, and modern web systems. Studying Computing with AI at Northumbria while shipping real ops tools.',
   about:
-    'I’m Savindu Thathsara, a web developer and automation-focused engineer with 7+ years building high-performance digital experiences. Since 2019 I’ve delivered React, Next.js, Vue, and WordPress systems at scale, then deepened into AWS, CI/CD, Docker, and workflow automation. Based in London and studying BSc (Hons) Computing with Artificial Intelligence at Northumbria University, I bridge product delivery with reliable infrastructure — removing manual work and shipping production-ready systems.',
+    "I'm Savindu Thathsara, an AI & Automation Engineer based in London, currently studying Computing with Artificial Intelligence at Northumbria University. Over 7 years I built a solid foundation in web systems and cloud infrastructure — React, Next.js, AWS (EC2, S3, CloudFront, Route 53), CI/CD, and Docker. I'm now applying that foundation toward a focused goal: building AI-aware automation that removes manual work from real businesses. Recent example: at Asahi Motors London, I connected Gmail to Google Sheets via Make.com to automate dealership lead tracking — no more leads lost in inboxes. I'm now integrating the Autotrader API with OpenAI to auto-generate lead replies, moving toward fully hands-off lead management. Actively building toward roles in AI automation engineering, MLOps, and applied AI.",
   email: 'blsthathsara@gmail.com',
   yearsExperience: '7+',
   availability: 'Open to AI & automation roles in the UK',
+  openTo: ['On-site', 'Hybrid', 'Remote'],
   links: {
     linkedin: 'https://www.linkedin.com/in/savithathsara/',
     github: 'https://github.com/BLSThathsara20',
@@ -22,64 +24,73 @@ export const profile = {
 
 export const skills = {
   aiAutomation: [
-    'AI literacy',
-    'Process automation',
+    'Workflow automation',
+    'Make.com',
     'Python automation',
-    'Make / workflow tools',
+    'OpenAI integrations',
+    'AI literacy',
     'Prompt-driven tooling',
   ],
-  cloud: ['AWS (EC2, S3, CloudFront, Route 53)', 'CI/CD', 'GitHub Actions', 'Docker', 'Server automation'],
-  web: ['React', 'Next.js', 'Vue.js', 'TypeScript', 'Node.js', 'Tailwind CSS'],
+  cloud: [
+    'AWS (EC2, S3, CloudFront, Route 53)',
+    'CI/CD',
+    'GitHub Actions',
+    'Docker',
+    'Server automation',
+  ],
+  web: ['React', 'Next.js', 'Vue.js', 'TypeScript', 'Node.js', 'Supabase', 'Tailwind CSS'],
   platforms: ['WordPress', 'WooCommerce', 'GSAP', 'Figma to code'],
 };
 
 export const experience = [
   {
     id: 'asahi',
-    role: 'Sales & Marketing Executive — IT Operations & Automation',
+    role: 'IT Operations & Automation | Sales & Marketing Executive',
     company: 'Asahi Motors London',
     location: 'London, UK',
     period: 'Feb 2026 — Present',
     current: true,
+    employment: 'Part-time',
     summary:
-      'Support sales and marketing while improving internal workflows with automation and web-based tools that reduce manual work across the dealership.',
+      'Lead IT operations and automation initiatives at Asahi Motors London — designing systems that remove manual work from daily business processes, alongside sales and marketing support.',
     highlights: [
-      'Built lead-tracking automation to streamline sales operations',
-      'Improved internal processes with practical digital tools',
-      'Blend customer-facing work with technical problem-solving',
+      'Automated dealership lead tracking (Gmail → Google Sheets via Make.com)',
+      'Built internal staff management platform (React + Supabase) with attendance, payroll, and RBAC',
+      'Integrating Autotrader API + OpenAI for auto-generated lead replies',
+      'Hybrid technical and customer-facing role across ops and digital marketing',
     ],
   },
   {
     id: 'enfection-associate-lead',
-    role: 'Associate Lead — Web Development',
+    role: 'Associate Lead Software Engineer',
     company: 'Enfection',
     location: 'Sri Lanka',
     period: 'Apr 2025 — Dec 2025',
     summary:
-      'Led cross-functional web projects, mentored engineers, enforced code quality, and integrated AWS / DevOps practices into delivery.',
+      'Drove technical excellence and innovation — leading cross-functional web projects, mentoring engineers, enforcing code quality, and integrating AWS / DevOps into delivery.',
     highlights: [
-      'Guided planning-to-deployment for high-impact web projects',
-      'Ran code reviews and maintained engineering standards',
+      'Led planning-to-deployment for high-impact web projects',
+      'Mentored juniors and ran detailed code reviews',
       'Contributed to innovation-lab tools and experimental solutions',
     ],
   },
   {
     id: 'enfection-junior-lead',
-    role: 'Junior Lead — Web Development',
+    role: 'Software Engineering Team Lead',
     company: 'Enfection',
     location: 'Sri Lanka',
     period: 'Apr 2024 — Apr 2025',
     summary:
-      'Moved from senior execution into leadership — managing small teams, timelines, and quality across React, Vue, and WordPress ecosystems.',
+      'Transitioned from senior execution into leadership — managing small teams, timelines, and quality across React, Vue, and WordPress ecosystems.',
     highlights: [
       'Mentored developers and improved delivery workflows',
       'Partnered with DevOps on hosting and deployment stability',
-      'Shipped frontend solutions across multiple client brands',
+      'Recognized as Innovator of the Year at Enfection annual awards',
     ],
   },
   {
     id: 'enfection-senior',
-    role: 'Senior Executive — Web Development',
+    role: 'Senior Software Engineer',
     company: 'Enfection',
     location: 'Sri Lanka',
     period: 'Mar 2023 — Apr 2024',
@@ -88,7 +99,7 @@ export const experience = [
   },
   {
     id: 'enfection-executive',
-    role: 'Executive — Web Development',
+    role: 'Software Engineer',
     company: 'Enfection',
     location: 'Sri Lanka',
     period: 'Jun 2022 — Mar 2023',
@@ -97,7 +108,7 @@ export const experience = [
   },
   {
     id: 'owiro',
-    role: 'Web Developer',
+    role: 'Software Engineer',
     company: 'Owiro Holdings',
     location: 'Colombo, Sri Lanka',
     period: 'Apr 2022 — May 2023',
@@ -122,6 +133,7 @@ export const education = [
     school: 'Northumbria University, London',
     period: '2026 — Present',
     location: 'London, UK',
+    note: 'Member of IBM Society',
   },
   {
     id: 'sliate',
@@ -147,6 +159,15 @@ export const awards = [
     year: '2026',
     description:
       'Selected at Northumbria University to support career development opportunities.',
+    featured: true,
+  },
+  {
+    id: 'enfection-innovator',
+    title: 'Innovator of the Year',
+    org: 'Enfection',
+    year: '2024',
+    description:
+      'Recognised at Enfection annual awards for research, development, and solving real-world problems through engineering.',
     featured: true,
   },
   {
@@ -181,22 +202,37 @@ export const certifications = [
     year: '2026',
   },
   {
-    title: 'Getting Started with Front-End and Web Development',
-    org: 'IBM',
-    year: '2024',
+    title: 'Using Python for Automation',
+    org: 'LinkedIn Learning',
+    year: '2026',
+  },
+  {
+    title: 'Train and Evaluate Deep Learning Models',
+    org: 'Microsoft Learn',
+    year: '2026',
   },
 ];
 
 export const featuredWork = [
+  {
+    id: 'asahi-staff-platform',
+    title: 'Staff Management Platform',
+    client: 'Asahi Motors London',
+    category: 'Internal systems',
+    description:
+      'Live attendance, who\'s-on-site dashboard, automated payroll from attendance, role-based access, and Google Sheets sync — built for a London dealership with React + Supabase.',
+    tech: ['React', 'Supabase', 'RBAC', 'Google Sheets'],
+    outcome: 'Hands-off attendance → payroll ops',
+  },
   {
     id: 'asahi-automation',
     title: 'Dealership Lead Automation',
     client: 'Asahi Motors London',
     category: 'Automation',
     description:
-      'Automated lead tracking for a London car dealership — replacing messy manual follow-up with a cleaner workflow built in under an hour and iterated into daily ops.',
-    tech: ['Automation', 'Workflow design', 'Web tools'],
-    outcome: 'Faster lead handling, less manual admin',
+      'Connected Gmail to Google Sheets via Make.com so Autotrader leads log automatically. Next: Autotrader API + OpenAI for auto-generated replies.',
+    tech: ['Make.com', 'Gmail', 'Google Sheets', 'OpenAI'],
+    outcome: 'No more leads lost in inboxes',
   },
   {
     id: 'tci',
@@ -210,24 +246,13 @@ export const featuredWork = [
     outcome: 'Structured CMS experience for a global initiative',
   },
   {
-    id: 'fortude',
-    title: 'Fortude',
-    client: 'Fortude',
-    category: 'Brand website',
-    description:
-      'Responsive custom WordPress theme blending classic design language with modern UI motion.',
-    tech: ['WordPress', 'GSAP', 'ACF'],
-    liveUrl: 'https://fortude.co/',
-    outcome: 'High-polish corporate web presence',
-  },
-  {
     id: 'buyrocell',
     title: 'Buyrocell E-Commerce',
     client: 'Buyrocell',
     category: 'E-commerce',
     description:
       'E-commerce platform for tiles, bathware, and accessories with custom catalogue and order management.',
-    tech: ['E-commerce', 'Custom catalogue', 'Responsive UI'],
+    tech: ['Laravel', 'Custom CMS', 'Responsive UI'],
     outcome: 'Product-led shopping experience',
   },
 ];

@@ -1,8 +1,8 @@
 # Savindu Thathsara
 
-> AI & automation engineer based in London. Builds practical automation, AWS workflows, and modern web systems. Studying BSc (Hons) Computing with Artificial Intelligence at Northumbria University, London.
+> AI & Automation Engineer in London. Building AI-aware automation and reliable web systems with AWS, workflow automation, React, and OpenAI. Studying BSc (Hons) Computing with Artificial Intelligence at Northumbria University, London.
 
-Savindu Thathsara is a web developer and automation-focused engineer with 7+ years of experience. He ships React, Next.js, Vue, and WordPress systems and works with AWS, CI/CD, GitHub Actions, Docker, and workflow automation. Open to AI and automation roles in the UK.
+Over 7 years in web systems and cloud infrastructure. Currently leading IT operations and automation at Asahi Motors London — Make.com lead tracking, React + Supabase staff platform, and Autotrader + OpenAI lead replies. Open to AI automation, MLOps, and applied AI roles in the UK (on-site, hybrid, or remote).
 
 ## Pages
 

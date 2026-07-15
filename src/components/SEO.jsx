@@ -9,16 +9,20 @@ const DEFAULT_IMAGE_WIDTH = 1200;
 const DEFAULT_IMAGE_HEIGHT = 630;
 
 const DEFAULT_DESCRIPTION =
-  'Savindu Thathsara — AI & automation engineer in London. 7+ years building web systems, AWS workflows, and practical automation. Studying Computing with AI at Northumbria University.';
+  'Savindu Thathsara — AI & Automation Engineer in London. 7+ years in web systems and cloud. Building Make.com workflows, React + Supabase ops tools, and AWS automation. Studying Computing with AI at Northumbria University.';
 
 const DEFAULT_KEYWORDS = [
   'Savindu Thathsara',
   'AI Automation Engineer',
-  'Process Automation',
   'Workflow Automation',
+  'Make.com',
+  'Process Automation',
   'AWS',
   'CI/CD',
   'React',
+  'Supabase',
+  'OpenAI',
+  'Python Automation',
   'Next.js',
   'Web Developer London',
   'Northumbria University',
@@ -27,6 +31,7 @@ const DEFAULT_KEYWORDS = [
   'GitHub Actions',
   'MLOps',
   'IT Operations Automation',
+  'Asahi Motors London',
 ];
 
 const SEO = ({

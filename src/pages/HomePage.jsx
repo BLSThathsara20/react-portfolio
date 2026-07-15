@@ -194,7 +194,7 @@ const HomePage = () => {
                   {profile.yearsExperience} years shipping
                 </p>
                 <p className="body-lg text-sm mt-2 max-w-sm">
-                  From Associate Lead at Enfection to automation at Asahi Motors London.
+                  From Associate Lead at Enfection to IT ops &amp; automation at Asahi Motors London.
                 </p>
               </div>
             </div>
@@ -299,6 +299,9 @@ const HomePage = () => {
                     <p className="font-sans text-sm text-ink-dark/75 mt-1">
                       {ed.school}
                     </p>
+                    {ed.note && (
+                      <p className="font-mono text-[11px] text-ink-dark/70 mt-1">{ed.note}</p>
+                    )}
                   </div>
                 ))}
               </div>

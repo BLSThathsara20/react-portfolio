@@ -8,16 +8,26 @@ import fortudeLogo from '../assets/projects/fortude-web.webp';
 export const projects = [
   {
     id: 1,
-    title: 'Dealership Lead Automation',
+    title: 'Staff Management Platform',
     description:
-      'Automated lead tracking for Asahi Motors London — practical workflow automation that cut manual follow-up and improved sales ops visibility.',
+      'Internal ops platform for Asahi Motors London — live attendance, who\'s-on-site dashboard, automated payroll from attendance data, RBAC, and Google Sheets sync. Built with React + Supabase.',
     image: null,
-    technologies: ['Automation', 'Workflow design', 'Web tools'],
+    technologies: ['React', 'Supabase', 'RBAC', 'Google Sheets'],
     category: 'Automation',
     highlight: true,
   },
   {
     id: 2,
+    title: 'Dealership Lead Automation',
+    description:
+      'Connected Gmail to Google Sheets via Make.com so Autotrader leads log automatically — no more leads lost in inboxes. Expanding with Autotrader API + OpenAI replies.',
+    image: null,
+    technologies: ['Make.com', 'Gmail', 'Google Sheets', 'OpenAI'],
+    category: 'Automation',
+    highlight: true,
+  },
+  {
+    id: 3,
     title: 'The Circulate Initiative',
     description:
       'Complex content-structured organisational website for a global circular-economy NGO — polished UX and production delivery.',
@@ -28,7 +38,7 @@ export const projects = [
     highlight: true,
   },
   {
-    id: 3,
+    id: 4,
     title: 'Fortude',
     description:
       'Responsive custom WordPress theme combining classic design with modern motion and ACF-driven content.',
@@ -39,16 +49,16 @@ export const projects = [
     highlight: true,
   },
   {
-    id: 4,
+    id: 5,
     title: 'Buyrocell E-Commerce',
     description:
       'E-commerce platform for tiles, bathware, and accessories with a custom product catalogue and order management.',
     image: null,
-    technologies: ['E-commerce', 'Custom catalogue', 'Responsive UI'],
+    technologies: ['Laravel', 'Custom CMS', 'Responsive UI'],
     category: 'E-commerce',
   },
   {
-    id: 5,
+    id: 6,
     title: 'Sanderstrothmann',
     description:
       'Modern corporate site for a contract development and manufacturing company across Asia.',
@@ -58,7 +68,7 @@ export const projects = [
     liveUrl: 'https://asia.sanderstrothmann.com/',
   },
   {
-    id: 6,
+    id: 7,
     title: 'Vairal AI',
     description:
       'Dynamic marketing site designed to showcase AI project pitches with a responsive Vue frontend.',
@@ -69,7 +79,7 @@ export const projects = [
     githubUrl: 'https://github.com/BLSThathsara20/Vairal',
   },
   {
-    id: 7,
+    id: 8,
     title: 'Luvrie Store',
     description:
       'WooCommerce gift store with gift-box customisation and AJAX-enhanced shopping flows.',
@@ -79,7 +89,7 @@ export const projects = [
     liveUrl: 'https://luvrie.com/',
   },
   {
-    id: 8,
+    id: 9,
     title: 'MVTM',
     description: 'Product showcase website for a clothing brand.',
     image: mvtmSS,
