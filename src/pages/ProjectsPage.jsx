@@ -4,7 +4,7 @@ import { Github, ArrowUpRight } from 'lucide-react';
 import { projects } from '../data/projects';
 import SEO from '../components/SEO';
 
-const categories = ['All', 'Automation', 'Web', 'E-commerce', 'JS Framework'];
+const categories = ['All', 'AI', 'Automation', 'Web', 'E-commerce', 'JS Framework'];
 
 const ProjectsPage = () => {
   const [activeCategory, setActiveCategory] = useState('All');
