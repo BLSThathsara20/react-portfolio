@@ -216,15 +216,16 @@ export const certifications = [
 
 export const featuredWork = [
   {
-    id: 'asahi-automation',
-    title: 'Dealership Lead Automation',
-    client: 'Asahi Motors London',
-    category: 'Automation',
+    id: 'farmsense-ai',
+    title: 'FarmSense AI',
+    client: 'Northumbria University · LD6053',
+    category: 'AI dissertation',
     description:
-      'Connected Gmail to Google Sheets via Make.com so Autotrader leads log automatically. Next: Autotrader API + OpenAI for auto-generated replies.',
-    tech: ['Make.com', 'Gmail', 'Google Sheets', 'OpenAI'],
-    outcome: 'No more leads lost in inboxes',
-    image: 'lead-automation',
+      'Intelligent crop planning for smallholder farmers — soil ML, LSTM weather & price forecasting, BERT demand signals, and XGBoost profit ranking in one React + FastAPI + PostgreSQL system.',
+    tech: ['React', 'FastAPI', 'scikit-learn', 'Docker'],
+    outcome: 'Profit-ranked plans — not soil-only ML',
+    githubUrl: 'https://github.com/BLSThathsara20/farmsense-ai',
+    image: 'farmsense-ai',
   },
   {
     id: 'buyrocell',
@@ -250,15 +251,14 @@ export const featuredWork = [
     outcome: 'Structured CMS experience for a global initiative',
   },
   {
-    id: 'farmsense-ai',
-    title: 'FarmSense AI',
-    client: 'Northumbria University · LD6053',
-    category: 'AI dissertation',
+    id: 'asahi-automation',
+    title: 'Dealership Lead Automation',
+    client: 'Asahi Motors London',
+    category: 'Automation',
     description:
-      'Intelligent crop planning for smallholder farmers — soil ML, LSTM weather & price forecasting, BERT demand signals, and XGBoost profit ranking in one React + FastAPI + PostgreSQL system.',
-    tech: ['React', 'FastAPI', 'scikit-learn', 'Docker'],
-    outcome: 'Profit-ranked plans — not soil-only ML',
-    githubUrl: 'https://github.com/BLSThathsara20/farmsense-ai',
-    image: 'farmsense-ai',
+      'Connected Gmail to Google Sheets via Make.com so Autotrader leads log automatically. Next: Autotrader API + OpenAI for auto-generated replies.',
+    tech: ['Make.com', 'Gmail', 'Google Sheets', 'OpenAI'],
+    outcome: 'No more leads lost in inboxes',
+    image: 'lead-automation',
   },
 ];

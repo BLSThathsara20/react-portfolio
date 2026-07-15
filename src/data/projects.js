@@ -11,16 +11,6 @@ import buyrocellSS from '../assets/projects/buyrocell.webp';
 export const projects = [
   {
     id: 1,
-    title: 'Dealership Lead Automation',
-    description:
-      'Connected Gmail to Google Sheets via Make.com so Autotrader leads log automatically — no more leads lost in inboxes. Expanding with Autotrader API + OpenAI replies.',
-    image: leadAutomationSS,
-    technologies: ['Make.com', 'Gmail', 'Google Sheets', 'OpenAI'],
-    category: 'Automation',
-    highlight: true,
-  },
-  {
-    id: 2,
     title: 'FarmSense AI',
     description:
       'BSc final-year dissertation (LD6053) — intelligent crop planning for smallholder farmers. Soil ML, LSTM weather & price forecasting, BERT demand signals, XGBoost profit ranking. React + FastAPI + PostgreSQL + Docker.',
@@ -31,6 +21,16 @@ export const projects = [
     highlight: true,
   },
   {
+    id: 2,
+    title: 'Dealership Lead Automation',
+    description:
+      'Connected Gmail to Google Sheets via Make.com so Autotrader leads log automatically — no more leads lost in inboxes. Expanding with Autotrader API + OpenAI replies.',
+    image: leadAutomationSS,
+    technologies: ['Make.com', 'Gmail', 'Google Sheets', 'OpenAI'],
+    category: 'Automation',
+    highlight: false,
+  },
+  {
     id: 3,
     title: 'Buyrocell E-Commerce',
     description:
@@ -39,7 +39,7 @@ export const projects = [
     technologies: ['Laravel', 'Custom CMS', 'Responsive UI'],
     category: 'E-commerce',
     liveUrl: 'https://buyrocell.com/',
-    highlight: true,
+    highlight: false,
   },
   {
     id: 4,
@@ -50,7 +50,7 @@ export const projects = [
     technologies: ['WordPress', 'GSAP', 'ScrollTrigger', 'Sass'],
     category: 'Web',
     liveUrl: 'https://thecirculateinitiative.org',
-    highlight: true,
+    highlight: false,
   },
   {
     id: 5,
