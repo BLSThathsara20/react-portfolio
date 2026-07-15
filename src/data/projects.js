@@ -4,30 +4,45 @@ import mvtmSS from '../assets/projects/mvtm.webp';
 import sanderSS from '../assets/projects/sander.webp';
 import tciSS from '../assets/projects/tci.webp';
 import fortudeLogo from '../assets/projects/fortude-web.webp';
+import leadAutomationSS from '../assets/projects/lead-automation.webp';
+import farmsenseSS from '../assets/projects/farmsense-ai.webp';
+import buyrocellSS from '../assets/projects/buyrocell.webp';
 
 export const projects = [
   {
     id: 1,
-    title: 'Staff Management Platform',
-    description:
-      'Internal ops platform for Asahi Motors London — live attendance, who\'s-on-site dashboard, automated payroll from attendance data, RBAC, and Google Sheets sync. Built with React + Supabase.',
-    image: null,
-    technologies: ['React', 'Supabase', 'RBAC', 'Google Sheets'],
-    category: 'Automation',
-    highlight: true,
-  },
-  {
-    id: 2,
     title: 'Dealership Lead Automation',
     description:
       'Connected Gmail to Google Sheets via Make.com so Autotrader leads log automatically — no more leads lost in inboxes. Expanding with Autotrader API + OpenAI replies.',
-    image: null,
+    image: leadAutomationSS,
     technologies: ['Make.com', 'Gmail', 'Google Sheets', 'OpenAI'],
     category: 'Automation',
     highlight: true,
   },
   {
+    id: 2,
+    title: 'FarmSense AI',
+    description:
+      'BSc final-year dissertation (LD6053) — intelligent crop planning for smallholder farmers. Soil ML, LSTM weather & price forecasting, BERT demand signals, XGBoost profit ranking. React + FastAPI + PostgreSQL + Docker.',
+    image: farmsenseSS,
+    technologies: ['React', 'FastAPI', 'scikit-learn', 'PostgreSQL', 'Docker'],
+    category: 'AI',
+    githubUrl: 'https://github.com/BLSThathsara20/farmsense-ai',
+    highlight: true,
+  },
+  {
     id: 3,
+    title: 'Buyrocell E-Commerce',
+    description:
+      'E-commerce platform for tiles, bathware, and accessories with a custom product catalogue and order management.',
+    image: buyrocellSS,
+    technologies: ['Laravel', 'Custom CMS', 'Responsive UI'],
+    category: 'E-commerce',
+    liveUrl: 'https://buyrocell.com/',
+    highlight: true,
+  },
+  {
+    id: 4,
     title: 'The Circulate Initiative',
     description:
       'Complex content-structured organisational website for a global circular-economy NGO — polished UX and production delivery.',
@@ -38,7 +53,7 @@ export const projects = [
     highlight: true,
   },
   {
-    id: 4,
+    id: 5,
     title: 'Fortude',
     description:
       'Responsive custom WordPress theme combining classic design with modern motion and ACF-driven content.',
@@ -46,16 +61,6 @@ export const projects = [
     technologies: ['WordPress', 'GSAP', 'ACF', 'Sass'],
     category: 'Web',
     liveUrl: 'https://fortude.co/',
-    highlight: true,
-  },
-  {
-    id: 5,
-    title: 'Buyrocell E-Commerce',
-    description:
-      'E-commerce platform for tiles, bathware, and accessories with a custom product catalogue and order management.',
-    image: null,
-    technologies: ['Laravel', 'Custom CMS', 'Responsive UI'],
-    category: 'E-commerce',
   },
   {
     id: 6,

@@ -153,6 +153,16 @@ export const education = [
 
 export const awards = [
   {
+    id: 'lseg',
+    title: 'LSEG Code & Conquer 2024 — 1st Place',
+    org: 'London Stock Exchange Group',
+    year: '2024',
+    description:
+      'Led BitSquad to 1st place — FinTech system design and problem-solving under pressure.',
+    featured: true,
+    highlight: true,
+  },
+  {
     id: 'santander',
     title: 'Santander Career Support Award 2025–26',
     org: 'Santander Universities UK',
@@ -168,15 +178,6 @@ export const awards = [
     year: '2024',
     description:
       'Recognised at Enfection annual awards for research, development, and solving real-world problems through engineering.',
-    featured: true,
-  },
-  {
-    id: 'lseg',
-    title: 'LSEG Code & Conquer 2024 — 1st Place',
-    org: 'London Stock Exchange Group',
-    year: '2024',
-    description:
-      'Led BitSquad to victory with strong system design and FinTech problem-solving.',
     featured: true,
   },
   {
@@ -215,16 +216,6 @@ export const certifications = [
 
 export const featuredWork = [
   {
-    id: 'asahi-staff-platform',
-    title: 'Staff Management Platform',
-    client: 'Asahi Motors London',
-    category: 'Internal systems',
-    description:
-      'Live attendance, who\'s-on-site dashboard, automated payroll from attendance, role-based access, and Google Sheets sync — built for a London dealership with React + Supabase.',
-    tech: ['React', 'Supabase', 'RBAC', 'Google Sheets'],
-    outcome: 'Hands-off attendance → payroll ops',
-  },
-  {
     id: 'asahi-automation',
     title: 'Dealership Lead Automation',
     client: 'Asahi Motors London',
@@ -233,6 +224,19 @@ export const featuredWork = [
       'Connected Gmail to Google Sheets via Make.com so Autotrader leads log automatically. Next: Autotrader API + OpenAI for auto-generated replies.',
     tech: ['Make.com', 'Gmail', 'Google Sheets', 'OpenAI'],
     outcome: 'No more leads lost in inboxes',
+    image: 'lead-automation',
+  },
+  {
+    id: 'buyrocell',
+    title: 'Buyrocell E-Commerce',
+    client: 'Rocell',
+    category: 'E-commerce',
+    description:
+      'E-commerce platform for tiles, bathware, and accessories with custom catalogue and order management.',
+    tech: ['Laravel', 'Custom CMS', 'Responsive UI'],
+    liveUrl: 'https://buyrocell.com/',
+    outcome: 'Product-led shopping experience',
+    image: 'buyrocell',
   },
   {
     id: 'tci',
@@ -246,13 +250,15 @@ export const featuredWork = [
     outcome: 'Structured CMS experience for a global initiative',
   },
   {
-    id: 'buyrocell',
-    title: 'Buyrocell E-Commerce',
-    client: 'Buyrocell',
-    category: 'E-commerce',
+    id: 'farmsense-ai',
+    title: 'FarmSense AI',
+    client: 'Northumbria University · LD6053',
+    category: 'AI dissertation',
     description:
-      'E-commerce platform for tiles, bathware, and accessories with custom catalogue and order management.',
-    tech: ['Laravel', 'Custom CMS', 'Responsive UI'],
-    outcome: 'Product-led shopping experience',
+      'Intelligent crop planning for smallholder farmers — soil ML, LSTM weather & price forecasting, BERT demand signals, and XGBoost profit ranking in one React + FastAPI + PostgreSQL system.',
+    tech: ['React', 'FastAPI', 'scikit-learn', 'Docker'],
+    outcome: 'Profit-ranked plans — not soil-only ML',
+    githubUrl: 'https://github.com/BLSThathsara20/farmsense-ai',
+    image: 'farmsense-ai',
   },
 ];

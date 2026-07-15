@@ -30,12 +30,26 @@ const ActivitiesPage = () => {
         <section className="section-pad">
           <div className="container-narrow divide-y divide-border border-y border-border">
             {awards.map((award) => (
-              <article key={award.id} className="py-8 sm:py-10 grid sm:grid-cols-12 gap-4">
+              <article
+                key={award.id}
+                className={`py-8 sm:py-10 grid sm:grid-cols-12 gap-4 ${
+                  award.highlight ? 'rounded-2xl border border-accent/35 bg-accent/[0.07] px-4 sm:px-6 my-2' : ''
+                }`}
+              >
                 <div className="sm:col-span-2">
                   <p className="font-sans text-sm text-ink-muted">{award.year}</p>
+                  {award.highlight && (
+                    <span className="mt-2 inline-block rounded-full bg-accent text-surface px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.14em] font-semibold">
+                      1st place
+                    </span>
+                  )}
                 </div>
                 <div className="sm:col-span-10">
-                  <h2 className="font-display text-2xl sm:text-3xl text-ink mb-2">
+                  <h2
+                    className={`font-display text-ink mb-2 ${
+                      award.highlight ? 'text-3xl sm:text-4xl' : 'text-2xl sm:text-3xl'
+                    }`}
+                  >
                     {award.title}
                   </h2>
                   <p className="font-sans text-sm text-accent mb-3">{award.org}</p>

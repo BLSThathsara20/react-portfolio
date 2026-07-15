@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import Marquee from '../components/Marquee';
 import profileImage from '../assets/savindu-experience.webp';
+import leadAutomationImg from '../assets/projects/lead-automation.webp';
+import farmsenseImg from '../assets/projects/farmsense-ai.webp';
+import buyrocellImg from '../assets/projects/buyrocell.webp';
 import {
   profile,
   skills,
@@ -14,6 +17,12 @@ import {
 } from '../data/profile';
 
 const SignalField = lazy(() => import('../components/SignalField'));
+
+const workImages = {
+  'lead-automation': leadAutomationImg,
+  'farmsense-ai': farmsenseImg,
+  buyrocell: buyrocellImg,
+};
 
 const HomePage = () => {
   const recentRoles = experience.slice(0, 3);
@@ -118,53 +127,73 @@ const HomePage = () => {
                       ? 'md:col-span-2'
                       : i === 2
                         ? 'md:col-span-2'
-                        : 'md:col-span-3';
+                        : 'md:col-span-6';
+                const img = work.image ? workImages[work.image] : null;
+                const external = work.liveUrl || work.githubUrl;
 
                 return (
                   <article
                     key={work.id}
-                    className={`bento-cell group p-6 sm:p-7 flex flex-col justify-between min-h-[200px] ${span}`}
+                    className={`bento-cell group p-0 overflow-hidden flex flex-col justify-between min-h-[200px] ${span}`}
                   >
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_30%_20%,rgba(200,245,66,0.12),transparent_55%)]" />
-                    <div className="relative">
-                      <div className="flex items-center justify-between gap-3 mb-4">
-                        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent">
-                          {work.category}
-                        </span>
-                        {work.liveUrl && (
-                          <a
-                            href={work.liveUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-ink-muted hover:text-accent"
-                            aria-label={`Open ${work.title}`}
-                          >
-                            <ArrowUpRight className="w-4 h-4" />
-                          </a>
-                        )}
-                      </div>
-                      <h3
-                        className={`font-display font-semibold tracking-tight text-ink mb-3 ${
-                          i === 0 ? 'text-3xl sm:text-4xl md:text-5xl' : 'text-2xl sm:text-3xl'
+                    {img && (
+                      <div
+                        className={`relative overflow-hidden ${
+                          i === 0 ? 'h-44 sm:h-56 md:h-64' : 'h-28 sm:h-32'
                         }`}
                       >
-                        {work.title}
-                      </h3>
-                      <p className="body-lg text-sm sm:text-base max-w-xl">
-                        {work.description}
-                      </p>
-                    </div>
-                    <div className="relative mt-6 flex flex-wrap items-center gap-2 justify-between">
-                      <p className="font-mono text-xs text-accent/90">{work.outcome}</p>
-                      <div className="flex flex-wrap gap-1.5">
-                        {work.tech.slice(0, 3).map((t) => (
-                          <span
-                            key={t}
-                            className="rounded-full border border-border px-2 py-0.5 text-[11px] text-ink-muted"
-                          >
-                            {t}
+                        <img
+                          src={img}
+                          alt=""
+                          loading="lazy"
+                          decoding="async"
+                          className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent" />
+                      </div>
+                    )}
+                    <div className="relative flex flex-1 flex-col justify-between p-6 sm:p-7">
+                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_30%_20%,rgba(200,245,66,0.12),transparent_55%)] pointer-events-none" />
+                      <div className="relative">
+                        <div className="flex items-center justify-between gap-3 mb-4">
+                          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent">
+                            {work.category}
                           </span>
-                        ))}
+                          {external && (
+                            <a
+                              href={external}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-ink-muted hover:text-accent"
+                              aria-label={`Open ${work.title}`}
+                            >
+                              <ArrowUpRight className="w-4 h-4" />
+                            </a>
+                          )}
+                        </div>
+                        <h3
+                          className={`font-display font-semibold tracking-tight text-ink mb-3 ${
+                            i === 0 ? 'text-3xl sm:text-4xl md:text-5xl' : 'text-2xl sm:text-3xl'
+                          }`}
+                        >
+                          {work.title}
+                        </h3>
+                        <p className="body-lg text-sm sm:text-base max-w-xl">
+                          {work.description}
+                        </p>
+                      </div>
+                      <div className="relative mt-6 flex flex-wrap items-center gap-2 justify-between">
+                        <p className="font-mono text-xs text-accent/90">{work.outcome}</p>
+                        <div className="flex flex-wrap gap-1.5">
+                          {work.tech.slice(0, 3).map((t) => (
+                            <span
+                              key={t}
+                              className="rounded-full border border-border px-2 py-0.5 text-[11px] text-ink-muted"
+                            >
+                              {t}
+                            </span>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </article>
@@ -314,12 +343,43 @@ const HomePage = () => {
               </h2>
               <div className="space-y-5">
                 {awards.map((award) => (
-                  <div key={award.id} className="flex gap-4 items-start">
-                    <span className="font-mono text-accent text-sm shrink-0">{award.year}</span>
-                    <div>
-                      <h3 className="font-display text-lg font-semibold">{award.title}</h3>
-                      <p className="font-sans text-sm text-ink-soft mt-1">{award.org}</p>
-                    </div>
+                  <div
+                    key={award.id}
+                    className={
+                      award.highlight
+                        ? 'rounded-2xl border border-accent/40 bg-accent/10 p-4 -mx-1'
+                        : 'flex gap-4 items-start'
+                    }
+                  >
+                    {award.highlight ? (
+                      <div>
+                        <div className="flex flex-wrap items-center gap-2 mb-2">
+                          <span className="font-mono text-accent text-sm">{award.year}</span>
+                          <span className="rounded-full bg-accent text-surface px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.16em] font-semibold">
+                            1st place
+                          </span>
+                        </div>
+                        <h3 className="font-display text-xl sm:text-2xl font-semibold tracking-tight text-ink">
+                          {award.title}
+                        </h3>
+                        <p className="font-sans text-sm text-ink-soft mt-1">{award.org}</p>
+                        {award.description && (
+                          <p className="font-sans text-sm text-ink-muted mt-2">
+                            {award.description}
+                          </p>
+                        )}
+                      </div>
+                    ) : (
+                      <>
+                        <span className="font-mono text-accent text-sm shrink-0">
+                          {award.year}
+                        </span>
+                        <div>
+                          <h3 className="font-display text-lg font-semibold">{award.title}</h3>
+                          <p className="font-sans text-sm text-ink-soft mt-1">{award.org}</p>
+                        </div>
+                      </>
+                    )}
                   </div>
                 ))}
               </div>
