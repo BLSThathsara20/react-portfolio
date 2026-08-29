@@ -1,0 +1,58 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://savithathsara.me/#person",
+  "name": "Savindu Thathsara",
+  "givenName": "Savindu",
+  "familyName": "Thathsara",
+  "alternateName": ["BLSThathsara20", "savithathsara"],
+  "url": "https://savithathsara.me/",
+  "image": "https://savithathsara.me/og-image.png",
+  "email": "mailto:blsthathsara@gmail.com",
+  "jobTitle": "AI & Automation Engineer",
+  "description": "AI & Automation Engineer in London. Builds AI-aware automation and reliable web systems. Studying Computing with Artificial Intelligence at Northumbria University London.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "London",
+    "addressCountry": "GB"
+  },
+  "alumniOf": {
+    "@type": "CollegeOrUniversity",
+    "name": "Northumbria University, London",
+    "sameAs": "https://www.northumbria.ac.uk/"
+  },
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Asahi Motors London"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/in/savithathsara/",
+    "https://github.com/BLSThathsara20",
+    "https://linktr.ee/Savinduthathsara"
+  ],
+  "knowsAbout": [
+    "AI Automation",
+    "Workflow Automation",
+    "Make.com",
+    "AWS",
+    "React",
+    "FastAPI",
+    "Machine Learning",
+    "CI/CD",
+    "Docker",
+    "OpenAI"
+  ],
+  "mainEntityOfPage": "https://savithathsara.me/",
+  "identifier": [
+    {
+      "@type": "PropertyValue",
+      "name": "LinkedIn",
+      "value": "https://www.linkedin.com/in/savithathsara/"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "GitHub",
+      "value": "https://github.com/BLSThathsara20"
+    }
+  ]
+}

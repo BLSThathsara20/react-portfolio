@@ -2,6 +2,7 @@
   publish = "dist"
   command = "npm run build"
 
+# SPA fallback — existing files in publish dir (llms.txt, about.md, etc.) are served first
 [[redirects]]
   from = "/*"
   to = "/index.html"
@@ -36,6 +37,37 @@
   [headers.values]
     Content-Type = "text/plain; charset=utf-8"
     Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/llms-full.txt"
+  [headers.values]
+    Content-Type = "text/plain; charset=utf-8"
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/ai.txt"
+  [headers.values]
+    Content-Type = "text/plain; charset=utf-8"
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/about.md"
+  [headers.values]
+    Content-Type = "text/markdown; charset=utf-8"
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/humans.txt"
+  [headers.values]
+    Content-Type = "text/plain; charset=utf-8"
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/person.json"
+  [headers.values]
+    Content-Type = "application/ld+json; charset=utf-8"
+    Cache-Control = "public, max-age=86400"
+    Access-Control-Allow-Origin = "*"
 
 [[headers]]
   for = "/robots.txt"

@@ -8,9 +8,14 @@ Disallow: /tmp/
 Disallow: /admin/
 Disallow: /private/
 
-# Explicitly allow key discovery files
+# Explicitly allow AI / SEO discovery files
 Allow: /sitemap.xml
 Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /about.md
+Allow: /ai.txt
+Allow: /humans.txt
+Allow: /person.json
 Allow: /robots.txt
 Allow: /og-image.png
 Allow: /manifest.json
@@ -40,6 +45,9 @@ User-agent: GPTBot
 Allow: /
 
 User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
 Allow: /
 
 User-agent: Google-Extended
@@ -73,6 +81,12 @@ User-agent: cohere-ai
 Allow: /
 
 User-agent: meta-externalagent
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
+User-agent: YouBot
 Allow: /
 
 Sitemap: https://savithathsara.me/sitemap.xml

@@ -237,7 +237,32 @@ const SEO = ({
 
       {/* AI / answer-engine discoverability */}
       <link rel="alternate" type="text/plain" href={`${SITE_URL}/llms.txt`} title="LLM context" />
+      <link
+        rel="alternate"
+        type="text/plain"
+        href={`${SITE_URL}/llms-full.txt`}
+        title="Full LLM biography"
+      />
+      <link
+        rel="alternate"
+        type="text/markdown"
+        href={`${SITE_URL}/about.md`}
+        title="About Savindu Thathsara (Markdown)"
+      />
+      <link rel="alternate" type="text/plain" href={`${SITE_URL}/ai.txt`} title="AI agent guide" />
+      <link
+        rel="describedby"
+        type="application/ld+json"
+        href={`${SITE_URL}/person.json`}
+        title="Person identity JSON-LD"
+      />
+      <link rel="author" type="text/plain" href={`${SITE_URL}/humans.txt`} />
       <meta name="ai-content-declaration" content="human-authored portfolio and professional profile" />
+      <meta
+        name="citation_author"
+        content="Savindu Thathsara"
+      />
+      <meta name="citation_title" content="Savindu Thathsara — AI & Automation Engineer" />
 
       <script type="application/ld+json">{JSON.stringify(graph)}</script>
     </Helmet>

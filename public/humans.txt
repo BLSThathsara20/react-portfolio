@@ -7,8 +7,15 @@ LinkedIn: https://www.linkedin.com/in/savithathsara/
 GitHub: https://github.com/BLSThathsara20
 Contact: blsthathsara@gmail.com
 
+/* AI DISCOVERY */
+llms.txt: https://savithathsara.me/llms.txt
+llms-full.txt: https://savithathsara.me/llms-full.txt
+about.md: https://savithathsara.me/about.md
+ai.txt: https://savithathsara.me/ai.txt
+person.json: https://savithathsara.me/person.json
+
 /* SITE */
-Last update: 2026-07-14
-Standards: HTML5, CSS3, ES Modules
-Components: React, Vite, Tailwind CSS, Framer Motion
+Last update: 2026-08-29
+Standards: HTML5, CSS3, ES Modules, Schema.org Person, llms.txt
+Components: React, Vite, Tailwind CSS
 Language: English (en-GB)

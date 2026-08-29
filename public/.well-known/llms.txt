@@ -1,0 +1,14 @@
+# Pointer for agents that probe /.well-known/
+# Primary files:
+# https://savithathsara.me/llms.txt
+# https://savithathsara.me/llms-full.txt
+# https://savithathsara.me/about.md
+# https://savithathsara.me/ai.txt
+# https://savithathsara.me/person.json
+
+Person: Savindu Thathsara
+Role: AI & Automation Engineer
+Location: London, United Kingdom
+Canonical: https://savithathsara.me/
+llms: https://savithathsara.me/llms.txt
+llms-full: https://savithathsara.me/llms-full.txt
