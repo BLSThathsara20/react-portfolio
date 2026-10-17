@@ -17,7 +17,9 @@ export const profile = {
     email: 'mailto:savindu@savithathsara.me',
     linktree: 'https://linktr.ee/Savinduthathsara',
     resume: '/cv.pdf',
-    whatsapp: 'https://wa.me/94764067093',
+    whatsapp:
+      'https://wa.me/447448533057?text=' +
+      encodeURIComponent('Hi Savindu — I found your site and wanted to say hello.'),
   },
 };
 
