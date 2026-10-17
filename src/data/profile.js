@@ -8,13 +8,13 @@ export const profile = {
     'AI & Automation Engineer in London — AWS, workflow automation, and modern web systems. Studying Computing with AI at Northumbria while shipping real ops tools.',
   about:
     "I'm Savindu Thathsara, an AI & Automation Engineer based in London, currently studying Computing with Artificial Intelligence at Northumbria University. Over 7 years I built a solid foundation in web systems and cloud infrastructure — React, Next.js, AWS (EC2, S3, CloudFront, Route 53), CI/CD, and Docker. I'm now applying that foundation toward a focused goal: building AI-aware automation that removes manual work from real businesses. Recent example: at Asahi Motors London, I connected Gmail to Google Sheets via Make.com to automate dealership lead tracking — no more leads lost in inboxes. I'm now integrating the Autotrader API with OpenAI to auto-generate lead replies, moving toward fully hands-off lead management.",
-  email: 'blsthathsara@gmail.com',
+  email: 'savindu@savithathsara.me',
   yearsExperience: '7+',
   tagline: 'Selected work & systems',
   links: {
     linkedin: 'https://www.linkedin.com/in/savithathsara/',
     github: 'https://github.com/BLSThathsara20',
-    email: 'mailto:blsthathsara@gmail.com',
+    email: 'mailto:savindu@savithathsara.me',
     linktree: 'https://linktr.ee/Savinduthathsara',
     resume: '/cv.pdf',
     whatsapp: 'https://wa.me/94764067093',

@@ -10,7 +10,7 @@ This site publishes structured context so large language models and AI agents ca
 - Website: https://savithathsara.me/
 - LinkedIn: https://www.linkedin.com/in/savithathsara/
 - GitHub: https://github.com/BLSThathsara20
-- Email: blsthathsara@gmail.com
+- Email: savindu@savithathsara.me
 
 ## Preferred context files (read these first)
 
@@ -33,4 +33,4 @@ AI crawlers are welcome. See https://savithathsara.me/robots.txt (GPTBot, Claude
 
 ## Contact
 
-Questions about this profile: blsthathsara@gmail.com
+Questions about this profile: savindu@savithathsara.me

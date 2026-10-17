@@ -5,7 +5,7 @@ Location: London, United Kingdom
 Site: https://savithathsara.me/
 LinkedIn: https://www.linkedin.com/in/savithathsara/
 GitHub: https://github.com/BLSThathsara20
-Contact: blsthathsara@gmail.com
+Contact: savindu@savithathsara.me
 
 /* AI DISCOVERY */
 llms.txt: https://savithathsara.me/llms.txt

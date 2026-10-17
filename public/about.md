@@ -5,7 +5,7 @@
 Official site: [https://savithathsara.me/](https://savithathsara.me/)  
 LinkedIn: [https://www.linkedin.com/in/savithathsara/](https://www.linkedin.com/in/savithathsara/)  
 GitHub: [https://github.com/BLSThathsara20](https://github.com/BLSThathsara20)  
-Email: blsthathsara@gmail.com
+Email: savindu@savithathsara.me
 
 ## Who I am
 

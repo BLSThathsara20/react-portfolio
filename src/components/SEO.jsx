@@ -62,7 +62,7 @@ const SEO = ({
     image: `${SITE_URL}/og-image.png`,
     jobTitle: 'AI & Automation Engineer',
     description: DEFAULT_DESCRIPTION,
-    email: 'mailto:blsthathsara@gmail.com',
+    email: 'mailto:savindu@savithathsara.me',
     nationality: 'Sri Lankan',
     address: {
       '@type': 'PostalAddress',
