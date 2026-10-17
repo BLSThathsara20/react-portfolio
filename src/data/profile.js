@@ -19,7 +19,7 @@ export const profile = {
     resume: '/cv.pdf',
     whatsapp:
       'https://wa.me/447448533057?text=' +
-      encodeURIComponent('Hi Savindu — I found your site and wanted to say hello.'),
+      encodeURIComponent('Hi Savindu - I found your site and wanted to say hello.'),
   },
 };
 
