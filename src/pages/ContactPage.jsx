@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Send,
@@ -10,15 +10,16 @@ import {
   CheckCircle2,
   MessageCircle,
 } from 'lucide-react';
-import emailjs from '@emailjs/browser';
 import SEO from '../components/SEO';
 import { profile } from '../data/profile';
 
-const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_pdj6b5w';
-const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_fv0heep';
-const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'hLt3-AGSDqAix159e';
+/** Inbox for form deliveries — FormSubmit (free) posts here */
+const INBOX = 'blsthathsara@gmail.com';
+const MIN_FILL_MS = 3000;
 
 const ContactPage = () => {
+  const openedAt = useRef(Date.now());
+  const [honey, setHoney] = useState('');
   const [formState, setFormState] = useState({
     name: '',
     email: '',
@@ -87,48 +88,55 @@ const ContactPage = () => {
       setTimeout(() => setSubmitStatus(null), 3000);
       return;
     }
+    if (honey) {
+      setSubmitStatus('success');
+      setFormState({ name: '', email: '', subject: '', message: '' });
+      return;
+    }
+    if (Date.now() - openedAt.current < MIN_FILL_MS) {
+      setSubmitStatus('error');
+      setSubmitError('Please wait a moment before sending.');
+      setTimeout(() => setSubmitStatus(null), 4000);
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitStatus(null);
     setSubmitError('');
 
-    const templateParams = {
-      name: formState.name,
-      email: formState.email,
-      from_name: formState.name,
-      from_email: formState.email,
-      reply_to: formState.email,
-      subject: formState.subject,
-      message: formState.message,
-      to_email: profile.email,
-    };
-
     try {
-      await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        templateParams,
-        { publicKey: EMAILJS_PUBLIC_KEY }
-      );
+      const response = await fetch(`https://formsubmit.co/ajax/${INBOX}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          name: formState.name,
+          email: formState.email,
+          subject: formState.subject,
+          message: formState.message,
+          _subject: `Portfolio contact: ${formState.subject}`,
+          _replyto: formState.email,
+          _template: 'table',
+          _captcha: 'false',
+          _honey: honey,
+        }),
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || data.success === 'false' || data.success === false) {
+        throw new Error(data.message || 'Send failed');
+      }
       setSubmitStatus('success');
       setFormState({ name: '', email: '', subject: '', message: '' });
     } catch (error) {
-      const status = error?.status || error?.text || '';
-      console.error('Email sending failed:', error);
-      // Fallback: open native mail client so contact never fully blocks
-      const mailto = `mailto:${profile.email}?subject=${encodeURIComponent(
-        formState.subject
-      )}&body=${encodeURIComponent(
-        `${formState.message}\n\n— ${formState.name} (${formState.email})`
-      )}`;
+      const message = error?.message || '';
       setSubmitStatus('error');
       setSubmitError(
-        status === 412 || String(status).includes('412')
-          ? 'Email service blocked this origin. Opening your mail app instead…'
-          : 'Couldn’t reach the email service. Opening your mail app instead…'
+        /activation/i.test(message)
+          ? 'Almost ready. Open blsthathsara@gmail.com and click the FormSubmit activation link, then send again.'
+          : 'Couldn’t send just now. Email blsthathsara@gmail.com directly, or try again in a minute.'
       );
-      window.setTimeout(() => {
-        window.location.href = mailto;
-      }, 600);
     } finally {
       setIsSubmitting(false);
       setTimeout(() => setSubmitStatus(null), 6000);
@@ -186,8 +194,21 @@ const ContactPage = () => {
 
             <form
               onSubmit={handleSubmit}
-              className="space-y-5 border border-border bg-surface-raised p-6 sm:p-8"
+              className="relative space-y-5 border border-border bg-surface-raised p-6 sm:p-8"
+              noValidate
             >
+              <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
+                <label htmlFor="company">Company</label>
+                <input
+                  id="company"
+                  name="company"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={honey}
+                  onChange={(e) => setHoney(e.target.value)}
+                />
+              </div>
               {[
                 { name: 'name', label: 'Name', type: 'text' },
                 { name: 'email', label: 'Email', type: 'email' },
